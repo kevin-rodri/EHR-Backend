@@ -6,8 +6,11 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const sectionRoutes = require('./routes/sectionRoutes');
 
 var app = express();
+
+// TO-DO: Add a function that will connect to the database
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/sections', sectionRoutes);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
