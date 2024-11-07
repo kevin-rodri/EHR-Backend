@@ -7,7 +7,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("sqlite::memory:"); // may have to adjust
 
 const User = sequelize.define("User", {
-  // liquibase changeset has ids as CHAR(36) and uses the UUID() function to generate them
+// liquibase changeset has ids as CHAR(36) and uses the UUID() function to generate them
   user_id: {
     type: DataTypes.CHAR(36),
     allowNull: false,
@@ -33,10 +33,6 @@ const User = sequelize.define("User", {
   section_id: {
     type: DataTypes.CHAR(36),
     allowNull: true,
-    references: {
-      model: "Section",
-      key: "section_id",
-    },
   },
 });
 
