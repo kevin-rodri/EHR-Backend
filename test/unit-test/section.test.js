@@ -1,21 +1,23 @@
 const Section = require("../../models/Section");
 const User = require("../../models/User");
 const Patient = require("../../models/Patient");
+const setupAssociations = require("../../associations");
 
 describe("Section Test", () => {
   let sectionTest = null;
-  let setudentUserTest = null;
+  let studentUserTest = null;
   let adminUserTest = null;
   let patientTest = null;
 
   beforeEach(() => {
-    setudentUserTest = new User({
+    studentUserTest = new User({
       user_id: "6ccd780c-baba-1026-9564-5b8c656024db",
       username: "the_mermaid_man",
       password: "the_actual_mermaid_man",
       full_name: "Mermaid Man",
       role: "STUDENT",
     });
+
     adminUserTest = new User({
       user_id: "6ccd780c-baba-1026-9564-5b8c676018db",
       username: "the_barnacle_boy",
@@ -51,7 +53,7 @@ describe("Section Test", () => {
       user_id: "6ccd780c-baba-1026-9564-5b8c676018db", // the admin
       patient_id: "6ccd780c-baba-1026-9564-5b8c659018db",
     });
-
+    setupAssociations(); 
     patientTest.section_id = sectionTest.section_id;
   });
 
@@ -61,22 +63,27 @@ describe("Section Test", () => {
     expect(sectionTest.section_name).toBe(
       "Mermaid Man and Barnacle Boy Fan Club"
     );
-    // Note: this belongs to the admin user. Another test will cover adding the student user.
     expect(sectionTest.user_id).toBe("6ccd780c-baba-1026-9564-5b8c676018db");
     expect(sectionTest.patient_id).toBe("6ccd780c-baba-1026-9564-5b8c659018db");
   });
 
   // verifies that the user in the section is an admin
   test("Section User is Admin", () => {
-    expect(sectionTest.user_id).toBe("6ccd780c-baba-1026-9564-5b8c676018db");
+    expect(sectionTest.user_id).toBe(adminUserTest.user_id);
   });
 
   // adding a student user to the section
-  // Note: this isn't a good unit test and I have to look up to do a many to many relationship. 
-  // this will get modified in the future.
   test("Add Student User to Section", () => {
-    sectionTest.user_id = setudentUserTest.user_id;
-    expect(sectionTest.user_id).toBe(setudentUserTest.user_id);
+    sectionTest.addUser = jest.fn();
+    sectionTest.users = [adminUserTest];
+
+    sectionTest.addUser(studentUserTest);
+    sectionTest.users.push(studentUserTest);
+
+    expect(sectionTest.users.length).toBe(2);
+    expect(sectionTest.users).toEqual(
+      expect.arrayContaining([adminUserTest, studentUserTest])
+    );
   });
 
   // verifies that the patient in the section and the patient has been assigned to the section (vice versa)
@@ -95,7 +102,6 @@ describe("Section Test", () => {
       expect(err.errors).toBeDefined();
     }
   });
-
 
   test("Section Name is required", () => {
     try {
@@ -116,7 +122,6 @@ describe("Section Test", () => {
       expect(err.errors).toBeDefined();
     }
   });
-
 
   test("Section Patient ID is required", () => {
     try {

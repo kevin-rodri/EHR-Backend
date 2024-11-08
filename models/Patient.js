@@ -4,7 +4,7 @@ Date: 11/4/2024
 Description: A Patient model representing the Patient table in the database.
 */
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("sqlite::memory:"); // may have to adjust
+const sequelize = new Sequelize("sqlite::memory:"); 
 
 const Patient = sequelize.define("Patient", {
   // liquibase changeset has ids as CHAR(36) and uses the UUID() function to generate them
