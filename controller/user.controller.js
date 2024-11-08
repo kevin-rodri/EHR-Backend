@@ -10,7 +10,7 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const signInUser = async (req, res) => {
+/*const getUserByID = async (req, res) => {
   const { user_id } = req.params;
   try {
     const user = await User.findByPk(user_id);
@@ -21,6 +21,17 @@ const signInUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error retrieving user' });
+  }
+};*/
+
+const signInUser = async (req, res) => {
+  const { username, password } = req.body
+  try{
+    const user = await User.find(u => u.username === username && u.password === password);
+    res.status(200).json(user);
+  }
+  catch (err) {
+    return res.status(400).send('Username or password is incorrect');
   }
 };
 
