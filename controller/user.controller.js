@@ -10,7 +10,7 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const getUserById = async (req, res) => {
+const signInUser = async (req, res) => {
   const { user_id } = req.params;
   try {
     const user = await User.findByPk(user_id);
@@ -69,7 +69,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
-  getUserById,
+  signInUser,
   createUser,
   updateUser,
   deleteUser,
