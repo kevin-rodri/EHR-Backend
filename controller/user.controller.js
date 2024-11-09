@@ -25,13 +25,17 @@ const getAllUsers = async (req, res) => {
 };*/
 
 const signInUser = async (req, res) => {
-  const { username, password } = req.body
+  const { username, password } = req.body;
   try{
     const user = await User.find(u => u.username === username && u.password === password);
+    if (!user) {
+      return res.status(400).send('Username or password is incorrect');
+    }
     res.status(200).json(user);
   }
-  catch (err) {
-    return res.status(400).send('Username or password is incorrect');
+  catch (error) {
+    console.error(error);
+    return res.status(500).send('Error sending credentials');
   }
 };
 

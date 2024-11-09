@@ -6,7 +6,7 @@ const { generateToken } = require("../middleware/middleware");
 router.get('/users', userController.getAllUsers);
 router
 .route('/users/signIn')
-.get([generateToken], userController.signInUser);
+.post([generateToken], userController.signInUser);
 router.post('/users', userController.createUser);
 router.put('/users/:user_id', userController.updateUser);
 router.delete('/users/:user_id', userController.deleteUser);
