@@ -11,7 +11,7 @@ const {
   updateSection,
   createSection,
   deleteSection,
-} = require("../controllers/section.controller");
+} = require("../controller/section.controller");
 const { isUserAdminFromToken } = require("../middleware/middleware");
 
 router

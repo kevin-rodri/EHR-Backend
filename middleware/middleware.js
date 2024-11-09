@@ -1,6 +1,10 @@
-const User = require("../models/User");
+/* 
+Name: Kevin Rodriguez
+Date: 11/4/2024 
+Description: Middleware functions that generate and validate tokens.
+*/
 const jwt = require("jsonwebtoken");
-const config = require("../config");
+const config = require("dotenv").config();
 
 // generates a token when a user signs in
 const generateToken = (user) => {
@@ -39,7 +43,7 @@ const isUserAdminFromToken = (req, res, next) => {
     return res.status(403).send("No token present");
   }
 
-  jwt.verify(token, config.secretKey, (err, user) => {
+  jwt.verify(token, config.secretKey, (user) => {
     if (user.role != "ADMIN") {
       return res.status(401).send("Unauthorized to access this resource");
     }
