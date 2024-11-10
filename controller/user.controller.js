@@ -1,3 +1,8 @@
+/* 
+Name: Dylan Bellinger
+Date: 11/9/2024 
+Description: User controller for handling requests.
+*/
 const { User } = require('../models/User.js');
 
 const getAllUsers = async (req, res) => {
@@ -10,23 +15,9 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-/*const getUserByID = async (req, res) => {
-  const { user_id } = req.params;
-  try {
-    const user = await User.findByPk(user_id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.status(200).json(user);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error retrieving user' });
-  }
-};*/
-
 const signInUser = async (req, res) => {
   const { username, password } = req.body;
-  try{
+  try {
     const user = await User.find(u => u.username === username && u.password === password);
     if (!user) {
       return res.status(400).send('Username or password is incorrect');
