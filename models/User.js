@@ -33,6 +33,10 @@ const User = sequelize.define("User", {
   section_id: {
     type: DataTypes.CHAR(36),
     allowNull: true,
+    references: {
+      model: "Section",
+      key: "section_id",
+    },
   },
 });
 
