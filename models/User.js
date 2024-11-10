@@ -1,3 +1,8 @@
+/* 
+Name: Kevin Rodriguez
+Date: 11/4/2024 
+Description: A User model representing the User table in the database.
+*/
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("sqlite::memory:");
 

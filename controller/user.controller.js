@@ -4,6 +4,7 @@ Date: 11/9/2024
 Description: User controller for handling requests.
 */
 const { User } = require('../models/User.js');
+const { generateToken } = require('../middleware/middleware');
 
 const getAllUsers = async (req, res) => {
   try {
@@ -22,7 +23,8 @@ const signInUser = async (req, res) => {
     if (!user) {
       return res.status(400).send('Username or password is incorrect');
     }
-    res.status(200).json(user);
+    const token = generateToken(user);
+    res.status(200).json({ token });
   }
   catch (error) {
     console.error(error);
