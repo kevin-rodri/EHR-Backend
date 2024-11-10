@@ -27,7 +27,7 @@ const Section = sequelize.define("Section", {
   },
   patient_id: {
     type: DataTypes.CHAR(36),
-    allowNull: false, 
+    allowNull: false,
     references: {
       model: "Patient",
       key: "patient_id",

@@ -7,9 +7,11 @@ Source: https://sequelize.org/master/manual/getting-started.html
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
 
+let sequelize;
+
 // Initialize Sequelize with environment variables
 function connectToDatabase() {
-  const sequelize = new Sequelize(
+  sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
     process.env.DB_PASSWORD,
@@ -30,14 +32,25 @@ function connectToDatabase() {
     .catch((err) => {
       console.error("Unable to connect to the database:", err);
     });
+
+  return sequelize; // Return the instance for potential use
 }
 
-// Close the database connection - used for testing
-function closeDatabaseConnection() { 
-  sequelize.close();
+// Close the database connection - used for testing purposes
+function closeDatabaseConnection() {
+  if (sequelize) {
+    sequelize
+      .close()
+      .then(() => console.log("Database connection closed successfully."))
+      .catch((err) =>
+        console.error("Error closing the database connection:", err)
+      );
+  } else {
+    console.error("No sequelize instance available to close.");
+  }
 }
 
 module.exports = {
   connectToDatabase,
-  closeDatabaseConnection
+  closeDatabaseConnection,
 };

@@ -53,7 +53,7 @@ const deleteSection = async (req, res) => {
       await section.destroy();
       res.status(204).json(section);
     } else {
-      res.status(404).json({ error: 'Section not found' });
+      res.status(404).json({ error: "Section not found" });
     }
   } catch (err) {
     res.status(500).json({ error: err.message });

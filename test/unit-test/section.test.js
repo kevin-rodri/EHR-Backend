@@ -103,7 +103,7 @@ describe("Section Unit Test", () => {
   });
 
   // These tests should verify that non-null fields are required!
-  test("Section ID is required", () => {
+  test("ThrowsError_WhenSectionIdIsNull_ReturnsValidationError", () => {
     try {
       const copy = { ...sectionTest };
       copy.section_id = null;
@@ -113,7 +113,7 @@ describe("Section Unit Test", () => {
     }
   });
 
-  test("Section Name is required", () => {
+  test("ThrowsError_WhenSectionNameIsNull_ReturnsValidationError", () => {
     try {
       const copy = { ...sectionTest };
       copy.section_name = null;
@@ -123,7 +123,7 @@ describe("Section Unit Test", () => {
     }
   });
 
-  test("Section User ID is required", () => {
+  test("ThrowsError_WhenUserIdIsNull_ReturnsValidationError", () => {
     try {
       const copy = { ...sectionTest };
       copy.user_id = null;
@@ -133,7 +133,7 @@ describe("Section Unit Test", () => {
     }
   });
 
-  test("Section Patient ID is required", () => {
+  test("ThrowsError_WhenPatientIdIsNull_ReturnsValidationError", () => {
     try {
       const copy = { ...sectionTest };
       copy.patient_id = null;
