@@ -18,7 +18,7 @@ const getAllPatients = async (req, res) => {
   const getPatientByID = async (req, res) => {
     const { patient_id } = req.params;
     try {
-      const patient = await User.findByPk(patient_id);
+      const patient = await Patient.findByPk(patient_id);
       if (!patient) {
         return res.status(404).json({ message: 'Patient not found' });
       }
@@ -26,6 +26,20 @@ const getAllPatients = async (req, res) => {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error retrieving patient' });
+    }
+  };
+
+  const getPatientBannerInfo = async (req, res) => {
+    const { patient_id } = req.params;
+    const { date_of_birth, full_name, allergies, height, weight, has_advanced_directives, code_status, precautions, has_insurance } = req.body;
+    try {
+        const patient = await Patient.findByPk(patient_id);
+        const patientInfo = await patient.find( p => p.date_of_birth === date_of_birth, p.full_name === full_name, p.allergies === allergies, p.height === height, 
+            p.weight === weight, p.has_advanced_directives === has_advanced_directives, p.code_status === code_status, p.precautions === precautions, p.has_insurance === has_insurance );
+        res.status(200).json(patientInfo);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error retrieving patient information' });
     }
   };
 
@@ -72,6 +86,7 @@ const getAllPatients = async (req, res) => {
 
   module.exports = {
     getAllPatients,
+    getPatientBannerInfo,
     getPatientByID,
     createPatient,
     updatePatient,
