@@ -29,7 +29,6 @@ const createPatientOrder = async (req, res) => {
 
 const updatePatientOrder = async (req, res) => {
   try {
-
     const patientOrder = await PatientOrders.findOne({
       where: {
         patient_id: req.params.patient_id,
