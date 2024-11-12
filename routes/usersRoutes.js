@@ -5,13 +5,17 @@ Description: User routes for endpoints.
 */
 var express = require("express");
 var router = express.Router();
-const userController = require("../controller/user.controller");
+const {
+  getAllUsers,
+  signInUser,
+  createUser,
+  updateUser,
+  deleteUser,
+} = require("../controller/user.controller");
 const { generateToken } = require("../middleware/middleware");
 
-router.get("/users", userController.getAllUsers);
-router.route("/users/signIn").post([generateToken], userController.signInUser);
-router.post("/users", userController.createUser);
-router.put("/users/:user_id", userController.updateUser);
-router.delete("/users/:user_id", userController.deleteUser);
+router.route("/").get(getAllUsers).post(createUser);
+router.route("/signIn").post([generateToken], signInUser);
+router.route("/:user_id").put(updateUser).delete(deleteUser);
 
 module.exports = router;
