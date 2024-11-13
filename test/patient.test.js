@@ -3,7 +3,7 @@ Name: Dylan Bellinger
 Date: 11/11/2024 
 Description: Patient model unit tests.
 */
-const Patient = require("../../models/Patient");
+const Patient = require("../models/Patient");
 
 describe("Patient Test", () => {
 
@@ -31,7 +31,7 @@ describe("Patient Test", () => {
       });
 
       test("Necessary Patient fields are not null", () => {
-        expect(patientTest.user_id).toBe("6ccd780c-baba-1026-9564-5b8c656024db");
+        expect(patientTest.patient_id).toBe("6ccd780c-baba-1026-9564-5b8c659018db");
         expect(patientTest.date_of_birth).toBe("1910-01-11");
         expect(patientTest.religion).toBe("None");
         expect(patientTest.full_name).toBe("Sherlock Holmes");
@@ -59,7 +59,7 @@ describe("Patient Test", () => {
         const copy = { ...patientTest };
         copy.precautions = "DROPLET";
         patientTest.validate();
-        expect(copy.code_status).toBe("DROPLET");
+        expect(copy.precautions).toBe("DROPLET");
     });
 
     test("Require_Patient_ID", () => {
