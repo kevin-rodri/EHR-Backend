@@ -8,11 +8,12 @@ const Patient = require("../models/Patient");
 describe("Patient Test", () => {
 
     let patientTest = null;
+    let date  = new Date();
 
     patientTest = new Patient({
         patient_id: "6ccd780c-baba-1026-9564-5b8c659018db",
         section_id: null,
-        date_of_birth: "1910-01-11",
+        date_of_birth: date,
         religion: "None",
         full_name: "Sherlock Holmes",
         weight: 150.0,
@@ -32,7 +33,7 @@ describe("Patient Test", () => {
 
       test("Necessary Patient fields are not null", () => {
         expect(patientTest.patient_id).toBe("6ccd780c-baba-1026-9564-5b8c659018db");
-        expect(patientTest.date_of_birth).toBe("1910-01-11");
+        expect(patientTest.date_of_birth).toBe(date);
         expect(patientTest.religion).toBe("None");
         expect(patientTest.full_name).toBe("Sherlock Holmes");
         expect(patientTest.weight).toBe(150.0);
