@@ -5,10 +5,10 @@ Description: Patient model unit tests.
 */
 const Patient = require("../models/Patient");
 
-describe("Patient Test", () => {
+describe("Patient Unit Test", () => {
 
     let patientTest = null;
-    let date  = new Date();
+    let date = new Date();
 
     patientTest = new Patient({
         patient_id: "6ccd780c-baba-1026-9564-5b8c659018db",
@@ -21,17 +21,17 @@ describe("Patient Test", () => {
         has_insurance: true,
         has_advanced_directives: true,
         allergies: {
-          allergy1: "Dust",
-          allergy2: "Peanuts",
-          allergy3: "Wheat",
+            allergy1: "Dust",
+            allergy2: "Peanuts",
+            allergy3: "Wheat",
         },
         emergency_contact_full_name: "John Watson",
         emergency_contact_phone_number: "123-456-7890",
         code_status: "FULL-CODE",
         precautions: "CONTACT",
-      });
+    });
 
-      test("Necessary Patient fields are not null", () => {
+    test("CreatesPatient_WhenAllConditionsMet_ReturnsObject", () => {
         expect(patientTest.patient_id).toBe("6ccd780c-baba-1026-9564-5b8c659018db");
         expect(patientTest.date_of_birth).toBe(date);
         expect(patientTest.religion).toBe("None");
@@ -49,21 +49,21 @@ describe("Patient Test", () => {
         expect(patientTest.precautions).toBe("CONTACT");
     });
 
-    test("Modify_Code_Status", () => {
+    test("CreatesPatient_WhenAllConditionsMet_ReturnsPatientCodeStatusDoesNotResuscitate", () => {
         const copy = { ...patientTest };
         copy.code_status = "DOES-NOT-RESUSCITATE";
         patientTest.validate();
         expect(copy.code_status).toBe("DOES-NOT-RESUSCITATE");
     });
 
-    test("Modify_Precautions", () => {
+    test("CreatesPatient_WhenAllConditionsMet_ReturnsPatientPreacutionDroplet", () => {
         const copy = { ...patientTest };
         copy.precautions = "DROPLET";
         patientTest.validate();
         expect(copy.precautions).toBe("DROPLET");
     });
 
-    test("Require_Patient_ID", () => {
+    test("ThrowsError_WhenPatientIDIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.patient_id = null;
@@ -73,7 +73,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Date_OF_Birth", () => {
+    test("ThrowsError_WhenDateOfBirthIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.date_of_birth = null;
@@ -83,7 +83,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Religion", () => {
+    test("ThrowsError_WhenReligionIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.religion = null;
@@ -93,7 +93,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Full_Name", () => {
+    test("ThrowsError_WhenFullNameIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.full_name = null;
@@ -103,7 +103,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Weight", () => {
+    test("ThrowsError_WhenWeightIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.weight = null;
@@ -113,7 +113,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Height", () => {
+    test("ThrowsError_WhenHeightIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.height = null;
@@ -123,7 +123,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Insurance", () => {
+    test("ThrowsError_WhenInsuranceIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.has_insurance = null;
@@ -133,7 +133,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Advanced_Directives", () => {
+    test("ThrowsError_WhenAdvancedDirectivesIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.has_advanced_directives = null;
@@ -143,7 +143,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Emergency_Contact_Full_Name", () => {
+    test("ThrowsError_WhenEmergencyContactFullNameIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.emergency_contact_full_name = null;
@@ -153,7 +153,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Emergency_Contact_Number", () => {
+    test("ThrowsError_WhenEmergencyContactNumberIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.emergency_contact_phone_number = null;
@@ -163,7 +163,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Code_Status", () => {
+    test("ThrowsError_WhenCodeStatusIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.code_status = null;
@@ -173,7 +173,7 @@ describe("Patient Test", () => {
         }
     });
 
-    test("Require_Precautions", () => {
+    test("ThrowsError_WhenPrecautionsIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...patientTest };
             copy.precautions = null;
