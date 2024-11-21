@@ -12,17 +12,13 @@ const {
   createSection,
   deleteSection,
 } = require("../controller/section.controller");
-const { isUserAdminFromToken } = require("../middleware/middleware");
 
-router
-  .route("/")
-  .get([isUserAdminFromToken], getAllSections)
-  .post([isUserAdminFromToken], createSection);
+router.route("/").get(getAllSections).post(createSection);
 
 router
   .route("/:id")
-  .get([isUserAdminFromToken], getSectionById)
-  .put([isUserAdminFromToken], updateSection)
-  .delete([isUserAdminFromToken], deleteSection);
+  .get(getSectionById)
+  .put(updateSection)
+  .delete(deleteSection);
 
 module.exports = router;

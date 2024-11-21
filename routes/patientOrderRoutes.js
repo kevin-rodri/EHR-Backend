@@ -11,16 +11,15 @@ const {
   updatePatientOrder,
   deletePatientOrder,
 } = require("../controller/patientOrders.controller");
-const { validateToken } = require("../middleware/middleware");
 
 router
   .route("/:patient_id/orders")
-  .post([validateToken], createPatientOrder)
-  .get([validateToken], getPatientOrders);
+  .post(createPatientOrder)
+  .get(getPatientOrders);
 
 router
   .route("/:patient_id/orders/:order_id")
-  .put([validateToken], updatePatientOrder)
-  .delete([validateToken], deletePatientOrder);
+  .put(updatePatientOrder)
+  .delete(deletePatientOrder);
 
 module.exports = router;

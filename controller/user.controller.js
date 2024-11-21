@@ -3,12 +3,12 @@ Name: Dylan Bellinger
 Date: 11/9/2024 
 Description: User controller for handling requests.
 */
-const { User } = require('../models/User.js');
+const { models } = require("../models");
 const { generateToken } = require('../middleware/middleware');
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await models.User.findAll();
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
@@ -19,9 +19,16 @@ const getAllUsers = async (req, res) => {
 const signInUser = async (req, res) => {
   const { username, password } = req.body;
   try {
-    const user = await User.find(u => u.username === username && u.password === password);
+    const user = await models.User.findOne({ where: { username }});
+
     if (!user) {
       return res.status(400).send('Username or password is incorrect');
+    }
+
+    const passwordConfirm = user.password;
+    // verifies if password passed in matches the one saved in db
+    if (passwordConfirm != password) {
+      return res.status(401).json({ message: 'Incorrect password' }); // this should fail if the password to assgin user does not match w/ what's saved in the db 
     }
     const token = generateToken(user);
     res.status(200).json({ token });
@@ -33,9 +40,9 @@ const signInUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { username, password, full_name, role, section_id } = req.body;
+  const { username, password, full_name, role } = req.body;
   try {
-    const newUser = await User.create({ username, password, full_name, role, section_id });
+    const newUser = await models.User.create({ username, password, full_name, role });
     res.status(201).json(newUser);
   } catch (error) {
     console.error(error);
@@ -44,27 +51,27 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { user_id } = req.params;
-  const { username, password, full_name, role, section_id } = req.body;
+  const { id } = req.params;
+  const { username, password, full_name, role } = req.body;
+
   try {
-    const [updatedRowsCount, updatedRows] = await User.update(
-      { username, password, full_name, role, section_id },
-      { where: { user_id }, returning: true }
-    );
-    if (updatedRowsCount === 0) {
-      return res.status(404).json({ message: 'User not found' });
+    const user = await models.User.findByPk(id);
+    if (user != null) {
+      await user.update({ username, password, full_name, role });
+      res.status(201).json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
     }
-    res.status(201).json(updatedRows[0]);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: 'Error updating user' });
+    res.status(500).json({ message: 'Error updating user' });
   }
 };
 
 const deleteUser = async (req, res) => {
-  const { user_id } = req.params;
+  const { id } = req.params;
   try {
-    const deletedUserCount = await User.destroy({ where: { user_id } });
+    const deletedUserCount = await models.User.destroy({ where: { id } });
     if (deletedUserCount === 0) {
       return res.status(404).json({ message: 'User not found' });
     }

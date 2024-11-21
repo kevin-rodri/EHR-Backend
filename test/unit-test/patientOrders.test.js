@@ -3,16 +3,14 @@ Name: Kevin Rodriguez
 Date: 11/4/2024 
 Description: Unit tests for the Patient Orders model.
 */
-const Patient = require("../../models/Patient");
-const PatientOrders = require("../../models/PatientOrders");
+const { models } = require("../../models");
 
 describe("Patient Orders Unit", () => {
   let patient = null;
   let patientOrder = null;
   const date = new Date();
   beforeEach(async () => {
-    patient = new Patient({
-      patient_id: "6ccd780c-baba-1026-9564-5b8c659018db",
+    patient = new models.Patient({
       section_id: null,
       date_of_birth: "1920-10-10",
       religion: "Christian",
@@ -31,9 +29,8 @@ describe("Patient Orders Unit", () => {
       code_status: "FULL-CODE",
       precautions: "CONTACT",
     });
-    patientOrder = new PatientOrders({
-      patient_order_id: "6ccd780c-bake-1026-2395-5b8c656024db",
-      patient_id: patient.patient_id,
+    patientOrder = new models.PatientOrders({
+      patient_id: patient.id,
       order_title: "A Patient Order",
       description:
         "This patient order is meant to be really descriptive. I do not get paid enough to write a long description, so this will do.",
@@ -43,10 +40,6 @@ describe("Patient Orders Unit", () => {
   });
 
   test("CreatesPatientOrder_WhenAllConditionsMet_ReturnsObject", () => {
-    expect(patientOrder.patient_order_id).toBe(
-      "6ccd780c-bake-1026-2395-5b8c656024db"
-    );
-    expect(patientOrder.patient_id).toBe(patient.patient_id);
     expect(patientOrder.order_title).toBe("A Patient Order");
     expect(patientOrder.description).toBe(
       "This patient order is meant to be really descriptive. I do not get paid enough to write a long description, so this will do."
@@ -57,7 +50,7 @@ describe("Patient Orders Unit", () => {
 
   // verify the patient order belongs to the patient
   test("CreatesPatientOrder_WhenAllConditionsMet_ReturnsPatientOrderBelongsToPatient", () => {
-    expect(patientOrder.patient_id).toBe(patient.patient_id);
+    expect(patientOrder.patient_id).toBe(patient.id);
   });
 
   test("ThrowsError_WhenPatientOrderIdIsNull_ReturnsValidationError", () => {

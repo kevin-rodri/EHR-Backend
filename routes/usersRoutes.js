@@ -12,10 +12,9 @@ const {
   updateUser,
   deleteUser,
 } = require("../controller/user.controller");
-const { generateToken } = require("../middleware/middleware");
 
 router.route("/").get(getAllUsers).post(createUser);
-router.route("/signIn").post([generateToken], signInUser);
-router.route("/:user_id").put(updateUser).delete(deleteUser);
+router.route("/signIn").post(signInUser);
+router.route("/:id").put(updateUser).delete(deleteUser);
 
 module.exports = router;

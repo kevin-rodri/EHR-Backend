@@ -4,11 +4,16 @@ Date: 11/11/2024
 Description: Patient Orders controller that handles requests.
 Source for adding where clauses: https://sequelize.org/docs/v6/core-concepts/model-querying-basics/
 */
-const PatientOrders = require("../models/PatientOrders");
+const { models } = require("../models");
 
 const getPatientOrders = async (req, res) => {
   try {
-    const patientOrder = await PatientOrders.findAll(req.params.patient_id);
+    // maybe change?
+    const patientOrder = await models.PatientOrders.findAll({
+      where: {
+        patient_id: req.params.patient_id,
+      },
+    });
     res.status(200).json(patientOrder);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -17,7 +22,7 @@ const getPatientOrders = async (req, res) => {
 
 const createPatientOrder = async (req, res) => {
   try {
-    const patientOrder = await PatientOrders.create({
+    const patientOrder = await models.PatientOrders.create({
       ...req.body,
       patient_id: req.params.patient_id,
     });
@@ -29,7 +34,7 @@ const createPatientOrder = async (req, res) => {
 
 const updatePatientOrder = async (req, res) => {
   try {
-    const patientOrder = await PatientOrders.findOne({
+    const patientOrder = await models.PatientOrders.findOne({
       where: {
         patient_id: req.params.patient_id,
         patient_order_id: req.params.order_id,
@@ -48,7 +53,7 @@ const updatePatientOrder = async (req, res) => {
 
 const deletePatientOrder = async (req, res) => {
   try {
-    const patientOrder = await PatientOrders.findOne({
+    const patientOrder = await models.PatientOrders.findOne({
       where: {
         patient_id: req.params.patient_id,
         patient_order_id: req.params.order_id,

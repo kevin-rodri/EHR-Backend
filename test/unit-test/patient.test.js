@@ -3,15 +3,14 @@ Name: Dylan Bellinger
 Date: 11/11/2024 
 Description: Patient model unit tests.
 */
-const Patient = require("../models/Patient");
+const { models } = require("../../models");
 
 describe("Patient Unit Test", () => {
 
     let patientTest = null;
     let date = new Date();
 
-    patientTest = new Patient({
-        patient_id: "6ccd780c-baba-1026-9564-5b8c659018db",
+    patientTest = new models.Patient({
         section_id: null,
         date_of_birth: date,
         religion: "None",
@@ -32,7 +31,6 @@ describe("Patient Unit Test", () => {
     });
 
     test("CreatesPatient_WhenAllConditionsMet_ReturnsObject", () => {
-        expect(patientTest.patient_id).toBe("6ccd780c-baba-1026-9564-5b8c659018db");
         expect(patientTest.date_of_birth).toBe(date);
         expect(patientTest.religion).toBe("None");
         expect(patientTest.full_name).toBe("Sherlock Holmes");

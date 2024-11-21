@@ -3,10 +3,7 @@ Name: Kevin Rodriguez
 Date: 11/4/2024 
 Description: Unit tests for the Section model.
 */
-const Section = require("../../models/Section");
-const User = require("../../models/User");
-const Patient = require("../../models/Patient");
-const setupAssociations = require("../../associations");
+const { models } = require("../../models");
 
 describe("Section Unit Test", () => {
   let sectionTest = null;
@@ -17,24 +14,21 @@ describe("Section Unit Test", () => {
   // sets up the necessary objects needed for the tests
   // Why not have fun with this. :) 
   beforeEach(() => {
-    studentUserTest = new User({
-      user_id: "6ccd780c-baba-1026-9564-5b8c656024db",
+    studentUserTest = new models.User({
       username: "the_mermaid_man",
       password: "the_actual_mermaid_man",
       full_name: "Mermaid Man",
       role: "STUDENT",
     });
 
-    adminUserTest = new User({
-      user_id: "6ccd780c-baba-1026-9564-5b8c676018db",
+    adminUserTest = new models.User({
       username: "the_barnacle_boy",
       password: "the_actual_barnacle_boy",
       full_name: "Barnacle Boy",
       role: "ADMIN",
     });
 
-    patientTest = new Patient({
-      patient_id: "6ccd780c-baba-1026-9564-5b8c659018db",
+    patientTest = new models.Patient({
       section_id: null,
       date_of_birth: "1920-10-10",
       religion: "Christian",
@@ -54,13 +48,11 @@ describe("Section Unit Test", () => {
       precautions: "CONTACT",
     });
 
-    sectionTest = new Section({
-      section_id: "6ccer80c-baba-1026-9514-5b8c656024db",
+    sectionTest = new models.Section({
       section_name: "Mermaid Man and Barnacle Boy Fan Club",
-      user_id: adminUserTest.user_id,
-      patient_id: "6ccd780c-baba-1026-9564-5b8c659018db",
+      user_id: adminUserTest.id,
+      patient_id: patientTest.id
     });
-    setupAssociations();
     patientTest.section_id = sectionTest.section_id;
   });
 
@@ -68,15 +60,14 @@ describe("Section Unit Test", () => {
   test("CreatesSection_WhenAllConditionsMet_ReturnsObject", () => {
     //Assert
     expect(sectionTest).not.toBeNull();
-    expect(sectionTest.section_id).toBe("6ccer80c-baba-1026-9514-5b8c656024db");
     expect(sectionTest.section_name).toBe("Mermaid Man and Barnacle Boy Fan Club");
-    expect(sectionTest.user_id).toBe("6ccd780c-baba-1026-9564-5b8c676018db");
-    expect(sectionTest.patient_id).toBe("6ccd780c-baba-1026-9564-5b8c659018db");
+    expect(sectionTest.user_id).toBe(adminUserTest.id);
+    expect(sectionTest.patient_id).toBe(patientTest.id);
   });
 
   // verifies that the user in the section is an admin
   test("CreatesSection_WhenAllConditionsMet_ReturnsUserID", () => {
-    expect(sectionTest.user_id).toBe(adminUserTest.user_id);
+    expect(sectionTest.user_id).toBe(adminUserTest.id);
   });
 
   // adding a student user to the section
@@ -98,7 +89,7 @@ describe("Section Unit Test", () => {
 
   // verifies that the patient in the section and the patient has been assigned to the section (vice versa)
   test("CreatesSection_WhenAllConditionsMet_ReturnsSectionPatient", () => {
-    expect(sectionTest.patient_id).toBe(patientTest.patient_id);
+    expect(sectionTest.patient_id).toBe(patientTest.id);
     expect(patientTest.section_id).toBe(sectionTest.section_id);
   });
 

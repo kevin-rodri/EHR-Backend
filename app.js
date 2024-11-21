@@ -7,12 +7,23 @@ var logger = require("morgan");
 const sectionRoutes = require("./routes/sectionRoutes");
 const userRoutes = require("./routes/usersRoutes");
 const patientOrderRoutes = require("./routes/patientOrderRoutes");
-const setupAssociations = require("./associations");
-const { connectToDatabase} = require('./connect'); 
+const patientRoutes  = require('./routes/patientsRoutes');
+const sequelize = require('./models');
 
-connectToDatabase();
-setupAssociations();
+// from https://github.com/sequelize/express-example/blob/master/express-main-example/sequelize/index.js
+async function assertDatabaseConnectionOk() {
+	console.log(`Checking database connection...`);
+	try {
+		await sequelize.authenticate();
+		console.log('Database connection OK!');
+	} catch (error) {
+		console.log('Unable to connect to the database:');
+		console.log(error.message);
+		process.exit(1);
+	}
+}
 
+assertDatabaseConnectionOk();
 var app = express();
 
 // view engine setup
@@ -28,6 +39,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/sections", sectionRoutes);
 app.use("/users", userRoutes);
 app.use("/patients", patientOrderRoutes);
+app.use("/patients", patientRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
