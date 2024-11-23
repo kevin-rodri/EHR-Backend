@@ -7,6 +7,7 @@ var logger = require("morgan");
 const sectionRoutes = require("./routes/sectionRoutes");
 const userRoutes = require("./routes/usersRoutes");
 const patientOrderRoutes = require("./routes/patientOrderRoutes");
+const patientIntakeRoutes = require("./routes/intakeRoutes");
 const patientRoutes  = require('./routes/patientsRoutes');
 const sequelize = require('./models');
 
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/sections", sectionRoutes);
 app.use("/users", userRoutes);
 app.use("/patients", patientOrderRoutes);
+app.use("/patients", patientIntakeRoutes);
 app.use("/patients", patientRoutes);
 
 // catch 404 and forward to error handler
