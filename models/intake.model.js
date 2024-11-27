@@ -9,6 +9,12 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Intake",
     {
+      id: {
+        type: DataTypes.CHAR(36),
+        allowNull: false,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4
+      },
       patient_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
