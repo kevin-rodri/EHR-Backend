@@ -7,7 +7,7 @@ Per: https://github.com/sequelize/express-example/blob/master/express-main-examp
 */
 
 function setupAssociations(sequelize) {
-  const { User, Section, Patient, PatientOrders } = sequelize.models;
+  const { User, Section, Patient, PatientOrders, Intake } = sequelize.models;
 
     // 1:N relationship between User and Section
     User.hasMany(Section, { foreignKey: "user_id" });
@@ -20,6 +20,10 @@ function setupAssociations(sequelize) {
     // 1:N relationship between Patient and PatientOrder
     Patient.hasMany(PatientOrders, { foreignKey: "patient_id" });
     PatientOrders.belongsTo(Patient, { foreignKey: "patient_id" });
+
+    // 1:N relationship between Intake and Patient
+    Patient.hasMany(Intake, { foreignKey: "patient_id" });
+    Intake.belongsTo(Patient, { foreignKey: "patient_id" });
 }
 
 module.exports = { setupAssociations };

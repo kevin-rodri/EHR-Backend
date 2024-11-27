@@ -5,41 +5,37 @@ Description: Intake data model.
 */
 const { DataTypes } = require("sequelize");
 
-const Intake = (sequelize) => sequelize.define("Intake", {
-
-    intake_id: {
-        type: DataTypes.CHAR(36),
-        allowNull: false,
-        primaryKey: true,
-      },
-
-    patient_id: {
+module.exports = (sequelize) => {
+  sequelize.define(
+    "Intake",
+    {
+      patient_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
           model: "Patient",
-          key: "patient_id",
+          key: "id",
         },
-    },
+      },
 
-    type: {
-        type: DataTypes.ENUM(
-          "PO",
-          "TUBE FEEDING",
-          "IV"
-        ),
+      type: {
+        type: DataTypes.ENUM("PO", "TUBE FEEDING", "IV"),
         allowNull: false,
-    },
+      },
 
-    amount: {
+      amount: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    },
+      },
 
-    date_and_time_taken: {
-        type: DataTypes.DATE,
+      date_and_time_taken: {
+        type: "TIMESTAMP",
         allowNull: false,
+      },
+    },
+    {
+      tableName: "intake",
+      timestamps: false,
     }
-});
-
-module.exports = Intake;
+  );
+};
