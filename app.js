@@ -8,6 +8,8 @@ const sectionRoutes = require("./routes/sectionRoutes");
 const userRoutes = require("./routes/usersRoutes");
 const patientOrderRoutes = require("./routes/patientOrderRoutes");
 const patientRoutes  = require('./routes/patientsRoutes');
+const patientPainScaleRoutes = require('./routes/patientPainScaleRoutes');
+const vitalSignsRoutes = require('./routes/vitalSignsRoutes');
 const sequelize = require('./models');
 
 // from https://github.com/sequelize/express-example/blob/master/express-main-example/sequelize/index.js
@@ -40,6 +42,8 @@ app.use("/sections", sectionRoutes);
 app.use("/users", userRoutes);
 app.use("/patients", patientOrderRoutes);
 app.use("/patients", patientRoutes);
+app.use("/patients", patientPainScaleRoutes);
+app.use("/patients", vitalSignsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

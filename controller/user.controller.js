@@ -58,7 +58,7 @@ const updateUser = async (req, res) => {
     const user = await models.User.findByPk(id);
     if (user != null) {
       await user.update({ username, password, full_name, role });
-      res.status(201).json(user);
+      res.status(200).json(user);
     } else {
       res.status(404).json({ message: 'User not found' });
     }
