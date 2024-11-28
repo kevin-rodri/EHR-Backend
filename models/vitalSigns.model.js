@@ -68,6 +68,7 @@ module.exports = (sequelize) => {
       },
       created_date: {
         type: "TIMESTAMP",
+        defaultValue: DataTypes.NOW,
         allowNull: false,
       },
       modified_by: {
@@ -76,6 +77,7 @@ module.exports = (sequelize) => {
       },
       modified_date: {
         type: "TIMESTAMP",
+        defaultValue: DataTypes.NOW,
         allowNull: false,
       },
     },
