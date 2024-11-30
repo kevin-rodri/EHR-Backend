@@ -25,6 +25,9 @@ const models = [
   require("./patient.model"),
   require("./patientOrder.model"),
   require("./intake.model"),
+  require("./patientPainScale.model"),
+  require("./vitalSigns.model")
+
   // you get the idea :)
 ];
 
