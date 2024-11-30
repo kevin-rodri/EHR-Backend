@@ -28,7 +28,7 @@ const updateSection = async (req, res) => {
     const section = await models.Section.findByPk(req.params.id);
     if (section != null) {
       await section.update(req.body);
-      res.status(201).json(section);
+      res.status(200).json(section);
     } else {
       res.status(404).json({ error: "Section not found" });
     }

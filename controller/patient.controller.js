@@ -47,7 +47,7 @@ const updatePatient = async (req, res) => {
     const patient = await models.Patient.findByPk(id);
     if (patient != null) {
       await patient.update(req.body);
-      return res.status(201).json(patient);
+      return res.status(200).json(patient);
     } else {
       return res.status(404).json({ message: "Patient not found" });
     }

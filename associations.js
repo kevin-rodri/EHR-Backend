@@ -7,23 +7,35 @@ Per: https://github.com/sequelize/express-example/blob/master/express-main-examp
 */
 
 function setupAssociations(sequelize) {
-  const { User, Section, Patient, PatientOrders, Intake } = sequelize.models;
 
-    // 1:N relationship between User and Section
-    User.hasMany(Section, { foreignKey: "user_id" });
-    Section.belongsTo(User, { foreignKey: "user_id" });
-  
-    // 1:N relationship between Patient and Section
-    Patient.hasMany(Section, { foreignKey: "patient_id" });
-    Section.belongsTo(Patient, { foreignKey: "patient_id" });
-  
-    // 1:N relationship between Patient and PatientOrder
-    Patient.hasMany(PatientOrders, { foreignKey: "patient_id" });
-    PatientOrders.belongsTo(Patient, { foreignKey: "patient_id" });
+  const {
+    User,
+    Section,
+    Patient,
+    PatientOrders,
+    VitalSigns,
+    PatientPainScale,
+  } = sequelize.models;
 
-    // 1:N relationship between Intake and Patient
-    Patient.hasMany(Intake, { foreignKey: "patient_id" });
-    Intake.belongsTo(Patient, { foreignKey: "patient_id" });
+  // 1:N relationship between User and Section
+  User.hasMany(Section, { foreignKey: "user_id" });
+  Section.belongsTo(User, { foreignKey: "user_id" });
+
+  // 1:N relationship between Patient and Section
+  Patient.hasMany(Section, { foreignKey: "patient_id" });
+  Section.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:N relationship between Patient and PatientOrder
+  Patient.hasMany(PatientOrders, { foreignKey: "patient_id" });
+  PatientOrders.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:N relationship between Patient and VitalSigns
+  Patient.hasMany(VitalSigns, { foreignKey: "patient_id" });
+  VitalSigns.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:1 relationship where VitalSigns has one PatientPainScale
+  VitalSigns.hasOne(PatientPainScale, { foreignKey: "id" });
+  PatientPainScale.belongsTo(VitalSigns, { foreignKey: "id" });
 }
 
 module.exports = { setupAssociations };
