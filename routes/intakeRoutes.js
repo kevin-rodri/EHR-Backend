@@ -18,7 +18,7 @@ router
   .post(createPatientIntake);
 
 router
-  .route("/:patient_id/intake/:intake_id")
+  .route("/:patient_id/intake/:id")
   .put(updatePatientIntake)
   .delete(deletePatientIntake);
 

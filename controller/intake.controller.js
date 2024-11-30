@@ -33,11 +33,11 @@ const updatePatientIntake = async (req, res) => {
     const intake = await models.Intake.findOne({
       where: {
         patient_id: req.params.patient_id,
-        intake_id: req.params.intake_id,
+        id: req.params.id,
       },
     });
     if (intake != null) {
-      await intake.update({ ...req.body, date_and_time_taken: new Date() });
+      await intake.update({ ...req.body });
       res.status(201).json(intake);
     } else {
       res.status(404).json({ error: "Intake record not found" });
@@ -52,7 +52,7 @@ const deletePatientIntake = async (req, res) => {
     const intake = await models.Intake.findOne({
       where: {
         patient_id: req.params.patient_id,
-        intake_id: req.params.intake_id,
+        id: req.params.id,
       },
     });
 
