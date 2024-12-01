@@ -10,7 +10,7 @@ describe("Intake Unit Test", () => {
   let intake = null;
   let date = new Date();
 
-  beforeEach(async () => {
+  beforeEach(() => {
     patient = new models.Patient({
       section_id: null,
       date_of_birth: date,

@@ -41,7 +41,12 @@ const updatePatientVitalSigns = async (req, res) => {
     });
 
     if (vitalSigns != null) {
-      await vitalSigns.update(req.body);
+      await vitalSigns.update({
+        id: req.params.id,
+        ...req.body,
+        patient_id: req.params.patient_id,
+        modified_date: new Date(),
+      });
       return res.status(201).json(vitalSigns);
     } else {
       return res.status(404).json({ message: "Unable to find Vital Signs" });

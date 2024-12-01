@@ -10,7 +10,7 @@ describe("Vital Signs Unit Tests", () => {
   let patientPainScaleTest = null;
   let patientTest = null;
   let date = new Date();
-  beforeEach(async () => {
+  beforeEach(() => {
     // hehe
     patientPainScaleTest = new models.PatientPainScale({
       scale_name: "An interesting scale name",
