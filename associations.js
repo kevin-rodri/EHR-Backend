@@ -7,7 +7,6 @@ Per: https://github.com/sequelize/express-example/blob/master/express-main-examp
 */
 
 function setupAssociations(sequelize) {
-
   const {
     User,
     Section,
@@ -15,7 +14,11 @@ function setupAssociations(sequelize) {
     PatientOrders,
     VitalSigns,
     PatientPainScale,
-    Intake
+    Intake,
+    Assessments,
+    GenitourinaryInfo,
+    UrinaryDetails,
+    DialysisInfo,
   } = sequelize.models;
 
   // 1:N relationship between User and Section
@@ -41,6 +44,24 @@ function setupAssociations(sequelize) {
   // 1:N relationship between Intake and Patient
   Patient.hasMany(Intake, { foreignKey: "patient_id" });
   Intake.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:1 relationship between Assessments and Patient
+  Assessments.hasOne(Patient, { foreignKey: "patient_id" });
+  Patient.belongsTo(Assessments, { foreignKey: "patient_id" });
+
+  // 1:1 relationship between GenitourinaryInfo and Assessments
+  Assessments.hasOne(GenitourinaryInfo, { foreignKey: "assessment_id" });
+  GenitourinaryInfo.belongsTo(Assessments, { foreignKey: "assessment_id" });
+
+  // 1:1 relationship between GenitourinaryInfo and UrinaryDetails
+  GenitourinaryInfo.hasOne(UrinaryDetails, { foreignKey: "genitourinary_id" });
+  UrinaryDetails.belongsTo(GenitourinaryInfo, {
+    foreignKey: "genitourinary_id",
+  });
+
+  // 1:1 relationship between GenitourinaryInfo and DialysisInfo
+  GenitourinaryInfo.hasOne(DialysisInfo, { foreignKey: "genitourinary_id" });
+  DialysisInfo.belongsTo(GenitourinaryInfo, { foreignKey: "genitourinary_id" });
 }
 
 module.exports = { setupAssociations };

@@ -1,13 +1,15 @@
 /* 
-Name: Dylan Bellinger
-Date: 11/18/2024 
-Description: Intake data model.
+Name: Kevin Rodriguez
+Date: 11/30/2024
+Description: The assessments model representing the assessments table in the database.  This 
+model will associate with other patient assessments. 
 */
+
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Intake",
+    "Assessments",
     {
       id: {
         type: DataTypes.CHAR(36),
@@ -22,25 +24,10 @@ module.exports = (sequelize) => {
           model: "Patient",
           key: "id",
         },
-      },
-
-      type: {
-        type: DataTypes.ENUM("PO", "TUBE FEEDING", "IV"),
-        allowNull: false,
-      },
-
-      amount: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-
-      date_and_time_taken: {
-        type: "TIMESTAMP",
-        allowNull: false,
-      },
+      }
     },
     {
-      tableName: "intake",
+      tableName: "assessments",
       timestamps: false,
     }
   );

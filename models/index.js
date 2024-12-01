@@ -26,8 +26,11 @@ const models = [
   require("./patientOrder.model"),
   require("./intake.model"),
   require("./patientPainScale.model"),
-  require("./vitalSigns.model")
-
+  require("./vitalSigns.model"),
+  require("./assessments.model"),
+  require("./genitourinaryInfo.model"), 
+  require("./urinaryDetails.model"), 
+  require("./dialysisInfo.model")
   // you get the idea :)
 ];
 
