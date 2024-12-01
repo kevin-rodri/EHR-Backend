@@ -37,14 +37,12 @@ const addDialysisInfo = async (req, res) => {
     });
 
     const genitourinaryInfo = await models.GenitourinaryInfo.findByPk(
-        req.params.genitourinary_id
-      );
-      await genitourinaryInfo.update({ modified_date: new Date() });
-      return res.status(200).json({
-        dialysisInfo, 
-        genitourinaryInfo: genitourinaryInfo
-      });
-      
+      req.params.genitourinary_id
+    );
+    await genitourinaryInfo.update({ modified_date: new Date() });
+    return res.status(200).json({
+      dialysisInfo
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error in creating dialysis info" });
@@ -63,15 +61,14 @@ const updateDialysisInfo = async (req, res) => {
     } else {
       await dialysisInfo.update({
         ...req.body,
-        genitourinary_id: req.params.genitourinary_id
+        genitourinary_id: req.params.genitourinary_id,
       });
       const genitourinaryInfo = await models.GenitourinaryInfo.findByPk(
         req.params.genitourinary_id
       );
       await genitourinaryInfo.update({ modified_date: new Date() });
       return res.status(200).json({
-        dialysisInfo, 
-        genitourinaryInfo: genitourinaryInfo
+        dialysisInfo
       });
     }
   } catch (error) {
@@ -85,7 +82,7 @@ const updateDialysisInfo = async (req, res) => {
 // deletes the patients dialysis info based on the genitourinary info id
 const deleteDialysisInfo = async (req, res) => {
   try {
-    const dialysisInfo = await models.DialysisInfo.findByPk(req.params.id); 
+    const dialysisInfo = await models.DialysisInfo.findByPk(req.params.id);
 
     if (dialysisInfo != null) {
       await dialysisInfo.destroy();

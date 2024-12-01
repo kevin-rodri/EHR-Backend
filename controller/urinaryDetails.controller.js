@@ -36,14 +36,12 @@ const addUrinaryDetails = async (req, res) => {
       genitourinary_id: req.params.genitourinary_id,
     });
     const genitourinaryInfo = await models.GenitourinaryInfo.findByPk(
-        req.params.genitourinary_id
-      );
-      await genitourinaryInfo.update({ modified_date: new Date() });
-      return res.status(201).json({
-        urinaryDetails, 
-        genitourinaryInfo: genitourinaryInfo
-      });
-      
+      req.params.genitourinary_id
+    );
+    await genitourinaryInfo.update({ modified_date: new Date() });
+    return res.status(201).json({
+      urinaryDetails
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error in creating urinary details" });
@@ -69,10 +67,8 @@ const updateUrinaryDetails = async (req, res) => {
       );
       await genitourinaryInfo.update({ modified_date: new Date() });
       return res.status(200).json({
-        urinaryDetails, 
-        genitourinaryInfo: genitourinaryInfo
+        urinaryDetails
       });
-      
     }
   } catch (error) {
     console.error(error);
