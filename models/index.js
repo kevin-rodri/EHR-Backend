@@ -30,7 +30,8 @@ const models = [
   require("./assessments.model"),
   require("./genitourinaryInfo.model"), 
   require("./urinaryDetails.model"), 
-  require("./dialysisInfo.model")
+  require("./dialysisInfo.model"),
+  require("./output.model")
   // you get the idea :)
 ];
 
