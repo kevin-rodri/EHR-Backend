@@ -15,6 +15,7 @@ const patientRoutes  = require('./routes/patientsRoutes');
 const patientPainScaleRoutes = require('./routes/patientPainScaleRoutes');
 const vitalSignsRoutes = require('./routes/vitalSignsRoutes');
 const uriinaryDetailsRoutes = require('./routes/urinaryDetailsRoutes');
+const patientOutputRoutes = require("./routes/outputRoutes");
 const sequelize = require('./models');
 
 // from https://github.com/sequelize/express-example/blob/master/express-main-example/sequelize/index.js
@@ -52,6 +53,7 @@ app.use("/patients", patientIntakeRoutes);
 app.use("/patients", patientRoutes);
 app.use("/patients", patientPainScaleRoutes);
 app.use("/patients", vitalSignsRoutes);
+app.use("/patients", patientOutputRoutes);
 app.use("/assessments", genitourinaryInfoRoutes);
 app.use("/urinary-details", uriinaryDetailsRoutes);
 
