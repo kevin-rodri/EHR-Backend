@@ -13,6 +13,7 @@ const patientOrderRoutes = require("./routes/patientOrderRoutes");
 const patientIntakeRoutes = require("./routes/intakeRoutes");
 const patientRoutes  = require('./routes/patientsRoutes');
 const patientPainScaleRoutes = require('./routes/patientPainScaleRoutes');
+const patientIVLinesRoutes = require('./routes/IVandLinesRoutes');
 const vitalSignsRoutes = require('./routes/vitalSignsRoutes');
 const uriinaryDetailsRoutes = require('./routes/urinaryDetailsRoutes');
 const patientOutputRoutes = require("./routes/outputRoutes");
@@ -54,6 +55,7 @@ app.use("/patients", patientRoutes);
 app.use("/patients", patientPainScaleRoutes);
 app.use("/patients", vitalSignsRoutes);
 app.use("/patients", patientOutputRoutes);
+app.use("/patients", patientIVLinesRoutes);
 app.use("/assessments", genitourinaryInfoRoutes);
 app.use("/urinary-details", uriinaryDetailsRoutes);
 

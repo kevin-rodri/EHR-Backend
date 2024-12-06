@@ -31,7 +31,8 @@ const models = [
   require("./genitourinaryInfo.model"), 
   require("./urinaryDetails.model"), 
   require("./dialysisInfo.model"),
-  require("./output.model")
+  require("./output.model"),
+  require("./IVandLines.model")
   // you get the idea :)
 ];
 

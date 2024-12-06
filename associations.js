@@ -19,7 +19,8 @@ function setupAssociations(sequelize) {
     GenitourinaryInfo,
     UrinaryDetails,
     DialysisInfo,
-    Output
+    Output,
+    IV_and_Lines
   } = sequelize.models;
 
   // 1:N relationship between User and Section
@@ -67,6 +68,10 @@ function setupAssociations(sequelize) {
   // 1:N relationship between Output and Patient
   Patient.hasMany(Output, { foreignKey: "patient_id" });
   Output.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:N relationship between IV and Lines and Patient
+  Patient.hasMany(Output, { foreignKey: "patient_id" });
+  IV_and_Lines.belongsTo(Patient, { foreignKey: "patient_id" });
 }
 
 module.exports = { setupAssociations };
