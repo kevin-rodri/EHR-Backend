@@ -28,10 +28,14 @@ const models = [
   require("./patientPainScale.model"),
   require("./vitalSigns.model"),
   require("./assessments.model"),
-  require("./genitourinaryInfo.model"), 
-  require("./urinaryDetails.model"), 
+  require("./genitourinaryInfo.model"),
+  require("./urinaryDetails.model"),
   require("./dialysisInfo.model"),
-  require("./output.model")
+  require("./output.model"),
+  require("./neurologicalInfo.model"),
+  require("./pupilInfo.model"),
+  require("./consciousnessInfo.model"),
+  require("./strengthInfo.model")
   // you get the idea :)
 ];
 
