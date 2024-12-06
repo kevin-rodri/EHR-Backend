@@ -19,7 +19,11 @@ function setupAssociations(sequelize) {
     GenitourinaryInfo,
     UrinaryDetails,
     DialysisInfo,
-    Output
+    Output,
+    NeurologicalInfo,
+    PupilInfo,
+    ConsciousnessInfo,
+    StrengthInfo,
   } = sequelize.models;
 
   // 1:N relationship between User and Section
@@ -67,6 +71,24 @@ function setupAssociations(sequelize) {
   // 1:N relationship between Output and Patient
   Patient.hasMany(Output, { foreignKey: "patient_id" });
   Output.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:! relationship between Assessments and NeurologicalInfo
+  Assessments.hasOne(NeurologicalInfo, { foreignKey: "assessment_id" });
+  NeurologicalInfo.belongsTo(Assessments, { foreignKey: "assessment_id" });
+
+  // 1:1 relationship between NeurologicalInfo and PupilInfo
+  NeurologicalInfo.hasOne(PupilInfo, { foreignKey: "neurological_id" });
+  PupilInfo.belongsTo(NeurologicalInfo, { foreignKey: "neurological_id" });
+
+  // 1:1 relationship between NeurologicalInfo and ConsciousnessInfo
+  NeurologicalInfo.hasOne(ConsciousnessInfo, { foreignKey: "neurological_id" });
+  ConsciousnessInfo.belongsTo(NeurologicalInfo, {
+    foreignKey: "neurological_id",
+  });
+
+  // 1:1 relationship between NeurologicalInfo and StrengthInfo
+  NeurologicalInfo.hasOne(StrengthInfo, { foreignKey: "neurological_id" });
+  StrengthInfo.belongsTo(NeurologicalInfo, { foreignKey: "neurological_id" });
 }
 
 module.exports = { setupAssociations };

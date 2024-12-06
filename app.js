@@ -7,6 +7,10 @@ var logger = require("morgan");
 const assessmentRoutes = require("./routes/assessmentsRoutes");
 const dialysisRoutes = require("./routes/dialysisInfoRoutes");
 const genitourinaryInfoRoutes = require("./routes/genitourinaryInfoRoutes");
+const neurologicalInfoRoutes = require("./routes/neurologicalInfoRoutes");
+const consciousnessInfoRoutes = require("./routes/consciousnessInfoRoutes");
+const pupilInfoRoutes = require("./routes/pupilInfoRoutes");
+const strengthInfoRoutes = require("./routes/strengthInfoRoutes");
 const sectionRoutes = require("./routes/sectionRoutes");
 const userRoutes = require("./routes/usersRoutes");
 const patientOrderRoutes = require("./routes/patientOrderRoutes");
@@ -55,6 +59,10 @@ app.use("/patients", patientPainScaleRoutes);
 app.use("/patients", vitalSignsRoutes);
 app.use("/patients", patientOutputRoutes);
 app.use("/assessments", genitourinaryInfoRoutes);
+app.use("/assessments", neurologicalInfoRoutes);
+app.use("/consciousness", consciousnessInfoRoutes);
+app.use("/pupils", pupilInfoRoutes);
+app.use("/strength", strengthInfoRoutes);
 app.use("/urinary-details", uriinaryDetailsRoutes);
 
 // catch 404 and forward to error handler

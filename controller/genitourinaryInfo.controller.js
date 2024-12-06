@@ -6,7 +6,7 @@ Description: Genitournary Info controller logic for any requests related to Geni
 
 const { models } = require("../models");
 
-// gets patient genitourinary info by patient and assessment id
+// gets patient genitourinary info and assessment id
 const getPatientGenitourinaryInfo = async (req, res) => {
   try {
     const genitourinaryInfo = await models.GenitourinaryInfo.findOne({
