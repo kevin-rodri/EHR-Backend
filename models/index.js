@@ -32,11 +32,12 @@ const models = [
   require("./urinaryDetails.model"),
   require("./dialysisInfo.model"),
   require("./output.model"),
-  require("./IVandLines.model")
+  require("./IVandLines.model"),
   require("./neurologicalInfo.model"),
   require("./pupilInfo.model"),
   require("./consciousnessInfo.model"),
-  require("./strengthInfo.model")
+  require("./strengthInfo.model"),
+  require("./gastrointestinalInfo.model")
   // you get the idea :)
 ];
 
