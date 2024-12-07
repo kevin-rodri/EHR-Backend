@@ -20,6 +20,7 @@ function setupAssociations(sequelize) {
     UrinaryDetails,
     DialysisInfo,
     Output,
+    IV_and_Lines
     NeurologicalInfo,
     PupilInfo,
     ConsciousnessInfo,
@@ -71,6 +72,10 @@ function setupAssociations(sequelize) {
   // 1:N relationship between Output and Patient
   Patient.hasMany(Output, { foreignKey: "patient_id" });
   Output.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:N relationship between IV and Lines and Patient
+  Patient.hasMany(IV_and_Lines, { foreignKey: "patient_id" });
+  IV_and_Lines.belongsTo(Patient, { foreignKey: "patient_id" });
 
   // 1:! relationship between Assessments and NeurologicalInfo
   Assessments.hasOne(NeurologicalInfo, { foreignKey: "assessment_id" });
