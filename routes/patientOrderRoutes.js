@@ -18,7 +18,7 @@ router
   .get(getPatientOrders);
 
 router
-  .route("/:patient_id/orders/:order_id")
+  .route("/:patient_id/orders/:id")
   .put(updatePatientOrder)
   .delete(deletePatientOrder);
 

@@ -36,10 +36,13 @@ module.exports = (sequelize) => {
       created_date: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW
+
       },
       modified_date: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW
       },
     },
     {

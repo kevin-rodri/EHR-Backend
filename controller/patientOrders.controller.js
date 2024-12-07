@@ -37,7 +37,7 @@ const updatePatientOrder = async (req, res) => {
     const patientOrder = await models.PatientOrders.findOne({
       where: {
         patient_id: req.params.patient_id,
-        patient_order_id: req.params.order_id,
+        id: req.params.id
       },
     });
     if (patientOrder != null) {
@@ -56,7 +56,7 @@ const deletePatientOrder = async (req, res) => {
     const patientOrder = await models.PatientOrders.findOne({
       where: {
         patient_id: req.params.patient_id,
-        patient_order_id: req.params.order_id,
+        id: req.params.id,
       },
     });
 

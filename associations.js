@@ -20,7 +20,7 @@ function setupAssociations(sequelize) {
     UrinaryDetails,
     DialysisInfo,
     Output,
-    IV_and_Lines
+    IV_and_Lines,
     NeurologicalInfo,
     PupilInfo,
     ConsciousnessInfo,
