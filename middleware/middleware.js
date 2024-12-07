@@ -5,6 +5,7 @@ Date: 11/4/2024
 Description: Middleware functions that generate and validate tokens.
 */
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 // generates a token when a user signs in
 const generateToken = (user) => {
@@ -52,8 +53,20 @@ const isUserAdminFromToken = (req, res, next) => {
   });
 };
 
+// 10 is recommended by bcrypt based on the documentation
+const hashPassword = async (password) => {
+  return await bcrypt.hash(password, 10);
+};
+
+// compares the password passed in with the hashed password in the db
+const comparePassword = async (password, hashedPassword) => {
+  return await bcrypt.compare(password, hashedPassword);
+};
+
 module.exports = {
   generateToken,
   validateToken,
   isUserAdminFromToken,
+  hashPassword,
+  comparePassword
 };

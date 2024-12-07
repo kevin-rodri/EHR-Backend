@@ -5,11 +5,28 @@ Description: Patient controller for handling requests.
 Set up logic borrowed from: https://github.com/sequelize/express-example/blob/master/express-main-example/express/routes/instruments.js: 
 Mostly just knowing how to initialize the models in the controllers.
 */
-const { models } = require('../models');
+const { models } = require("../models");
 
 const getAllPatients = async (req, res) => {
   try {
-    const patients = await models.Patient.findAll();
+    const patients = await models.Patient.findAll({
+      attributes: [
+        "id",
+        "section_id",
+        "date_of_birth",
+        "religion",
+        "full_name",
+        "weight",
+        "height",
+        "has_insurance",
+        "has_advanced_directives",
+        "allergies",
+        "emergency_contact_full_name",
+        "emergency_contact_phone_number",
+        "code_status",
+        "precautions",
+      ],
+    });
     res.status(200).json(patients);
   } catch (error) {
     console.error(error);
@@ -18,9 +35,26 @@ const getAllPatients = async (req, res) => {
 };
 
 const getPatientByID = async (req, res) => {
-  const { id } = req.params;
   try {
-    const patient = await models.Patient.findByPk(id);
+    const patient = await models.Patient.findOne({
+      where: { id: req.params.id },
+      attributes: [
+        "id",
+        "section_id",
+        "date_of_birth",
+        "religion",
+        "full_name",
+        "weight",
+        "height",
+        "has_insurance",
+        "has_advanced_directives",
+        "allergies",
+        "emergency_contact_full_name",
+        "emergency_contact_phone_number",
+        "code_status",
+        "precautions",
+      ],
+    });
     if (patient == null) {
       return res.status(404).json({ message: "Patient not found" });
     }
@@ -42,9 +76,26 @@ const createPatient = async (req, res) => {
 };
 
 const updatePatient = async (req, res) => {
-  const { id } = req.params;
   try {
-    const patient = await models.Patient.findByPk(id);
+    const patient = await models.Patient.findOne({
+      where: { id: req.params.id },
+      attributes: [
+        "id",
+        "section_id",
+        "date_of_birth",
+        "religion",
+        "full_name",
+        "weight",
+        "height",
+        "has_insurance",
+        "has_advanced_directives",
+        "allergies",
+        "emergency_contact_full_name",
+        "emergency_contact_phone_number",
+        "code_status",
+        "precautions",
+      ],
+    });
     if (patient != null) {
       await patient.update(req.body);
       return res.status(200).json(patient);
@@ -58,9 +109,26 @@ const updatePatient = async (req, res) => {
 };
 
 const deletePatient = async (req, res) => {
-  const { id } = req.params;
   try {
-    const patient = await User.findByPk(id);
+    const patient = await models.Patient.findOne({
+      where: { id: req.params.id },
+      attributes: [
+        "id",
+        "section_id",
+        "date_of_birth",
+        "religion",
+        "full_name",
+        "weight",
+        "height",
+        "has_insurance",
+        "has_advanced_directives",
+        "allergies",
+        "emergency_contact_full_name",
+        "emergency_contact_phone_number",
+        "code_status",
+        "precautions",
+      ],
+    });
     if (patient != null) {
       await patient.destroy(req.body);
       return res.status(204).json(patient);
