@@ -29,30 +29,30 @@ describe("IV and Lines Unit Test", () => {
         ivLines = new models.IV_and_Lines({
             patient_id: patient.id,
             iv_type: "EXAMPLE",
-            size: "100",
-            scale_name: "EXAMPLE1",
+            size: "Single Lumen",
+            location: "EXAMPLE1",
             fluid_or_med_name: "EXAMPLE2",
             fluid_or_med_rate: "EXAMPLE3",
             patent: true,
             is_clinical_documentation_improvement: true,
-            created_by: "EXAMPLE4",
+            created_by: "Dr. B",
             created_date: date.valueOf(),
-            modified_by: "EXAMPLE5",
+            modified_by: "Dr. B",
             modified_date: date.valueOf(),
         });
     });
 
     test("CreatesOutput_WhenAllConditionsMet_ReturnsObject", () => {
         expect(ivLines.iv_type).toBe("EXAMPLE");
-        expect(ivLines.size).toBe("100");
-        expect(ivLines.scale_name).toBe("EXAMPLE1");
+        expect(ivLines.size).toBe("Single Lumen");
+        expect(ivLines.location).toBe("EXAMPLE1");
         expect(ivLines.fluid_or_med_name).toBe("EXAMPLE2");
         expect(ivLines.fluid_or_med_rate).toBe("EXAMPLE3");
         expect(ivLines.patent).toBe(true);
         expect(ivLines.is_clinical_documentation_improvement).toBe(true);
-        expect(ivLines.created_by).toBe("EXAMPLE4");
+        expect(ivLines.created_by).toBe("Dr. B");
         expect(ivLines.created_date).toBe(date.valueOf());
-        expect(ivLines.modified_by).toBe("EXAMPLE5");
+        expect(ivLines.modified_by).toBe("Dr. B");
         expect(ivLines.modified_date).toBe(date.valueOf());
     });
 
@@ -100,10 +100,10 @@ describe("IV and Lines Unit Test", () => {
         }
     });
 
-    test("ThrowsError_WhenScaleNameIsNull_ReturnsValidationError", () => {
+    test("ThrowsError_WhenLocationIsNull_ReturnsValidationError", () => {
         try {
             const copy = { ...ivLines };
-            copy.scale_name = null;
+            copy.location = null;
             ivLines.validate();
         } catch (err) {
             expect(err.errors).toBeDefined();

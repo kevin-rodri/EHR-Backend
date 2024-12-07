@@ -12,7 +12,7 @@ const getPatientIVLines = async (req, res) => {
         });
         res.status(200).json(ivLines);
     } catch (error) {
-        res.status(500).json({ message: "Error retrieving IV and Lines" });
+        res.status(500).json({ error: error.message });
     }
 };
 

@@ -31,12 +31,12 @@ module.exports = (sequelize) => {
             },
 
             size: {
-                type: DataTypes.CHAR(250),
+                type: DataTypes.CHAR(50),
                 allowNull: false,
             },
 
-            scale_name: {
-                type: DataTypes.CHAR(50),
+            location: {
+                type: DataTypes.CHAR(250),
                 allowNull: false,
             },
 

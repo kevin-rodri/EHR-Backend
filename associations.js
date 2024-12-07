@@ -70,7 +70,7 @@ function setupAssociations(sequelize) {
   Output.belongsTo(Patient, { foreignKey: "patient_id" });
 
   // 1:N relationship between IV and Lines and Patient
-  Patient.hasMany(Output, { foreignKey: "patient_id" });
+  Patient.hasMany(IV_and_Lines, { foreignKey: "patient_id" });
   IV_and_Lines.belongsTo(Patient, { foreignKey: "patient_id" });
 }
 
