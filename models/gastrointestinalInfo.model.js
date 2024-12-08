@@ -27,27 +27,27 @@ module.exports = (sequelize) => {
 
             right_upper_quadrant: {
                 type: DataTypes.CHAR(100),
-                allowNull: true,
+                allowNull: false,
             },
 
             right_lower_quadrant: {
                 type: DataTypes.CHAR(100),
-                allowNull: true,
+                allowNull: false,
             },
 
             lower_upper_quadrant: {
                 type: DataTypes.CHAR(100),
-                allowNull: true,
+                allowNull: false,
             },
 
             lower_lower_quadrant: {
                 type: DataTypes.CHAR(100),
-                allowNull: true,
+                allowNull: false,
             },
 
             stool: {
                 type: DataTypes.CHAR(100),
-                allowNull: true,
+                allowNull: false,
             },
 
             last_bowel_movement: {
@@ -57,7 +57,7 @@ module.exports = (sequelize) => {
 
             gastric_tubic_note: {
                 type: DataTypes.CHAR(255),
-                allowNull: true,
+                allowNull: false,
             },
 
             created_by: {
