@@ -39,7 +39,10 @@ const models = [
   require("./strengthInfo.model"),
   require("./adl.model"),
   require("./gastrointestinalInfo.model"),
-  require("./musculoskeletalInfo.model")
+  require("./musculoskeletalInfo.model"),
+  require("./patientMedications.model"),
+  require("./waldoDiagrams.model"), 
+  require("./labValues.model")
   // you get the idea :)
 ];
 
