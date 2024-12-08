@@ -1,3 +1,8 @@
+/* 
+Name: Dylan Bellinger
+Date: 12/7/2024 
+Description: Gastrointestinal Info controller for related requests.
+*/
 const { models } = require("../models");
 
 const getPatientGastrointestinalInfo = async (req, res) => {

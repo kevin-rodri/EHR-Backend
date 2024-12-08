@@ -1,3 +1,8 @@
+/* 
+Name: Dylan Bellinger
+Date: 12/8/2024 
+Description: Gastrointestinal Info routes for endpoints.
+*/
 const express = require("express");
 const router = express.Router();
 
