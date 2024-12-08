@@ -12,6 +12,7 @@ const {
   updateUser,
   deleteUser,
   getUserById,
+  verifyToken, 
 } = require("../controller/user.controller");
 const {
   validateToken,
@@ -25,5 +26,7 @@ router
   .put(updateUser)
   .delete([validateFacultyToken], deleteUser)
   .get([validateToken], getUserById);
+//new route to verify token
+router.route("/:id/is-authenticated").get([validateToken],verifyToken);
 
 module.exports = router;

@@ -4,6 +4,7 @@ Date: 11/9/2024
 Description: User controller for handling requests.
 Also, per the bcrypt documentation: https://www.npmjs.com/package/bcrypt
 */
+const jwt = require("jsonwebtoken");
 const { models } = require("../models");
 const { generateToken, hashPassword, comparePassword  } = require('../middleware/middleware');
 
@@ -97,7 +98,25 @@ const deleteUser = async (req, res) => {
     res.status(500).json({ message: 'Error deleting user' });
   }
 };
+// New endpoint to check if the JWT token is valid
+const verifyToken = async (req, res) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; // Bearer token
+  
+  if (!token) {
+    return res.status(401).json({ authenticated: false, message: "No token provided" });
+  }
 
+  jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({
+        authenticated: false,
+        message: err.name === "TokenExpiredError" ? "Token expired" : "Invalid token",
+      });
+    }
+    res.status(200).json({ authenticated: true, user: decoded });
+  });
+};
 module.exports = {
   getAllUsers,
   getUserById,
@@ -105,4 +124,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  verifyToken,
 };
