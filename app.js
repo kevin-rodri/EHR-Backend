@@ -15,27 +15,30 @@ const sectionRoutes = require("./routes/sectionRoutes");
 const userRoutes = require("./routes/usersRoutes");
 const patientOrderRoutes = require("./routes/patientOrderRoutes");
 const patientIntakeRoutes = require("./routes/intakeRoutes");
-const patientRoutes  = require('./routes/patientsRoutes');
-const patientPainScaleRoutes = require('./routes/patientPainScaleRoutes');
-const patientIVLinesRoutes = require('./routes/IVandLinesRoutes');
-const vitalSignsRoutes = require('./routes/vitalSignsRoutes');
-const uriinaryDetailsRoutes = require('./routes/urinaryDetailsRoutes');
+const patientRoutes = require("./routes/patientsRoutes");
+const patientPainScaleRoutes = require("./routes/patientPainScaleRoutes");
+const patientIVLinesRoutes = require("./routes/IVandLinesRoutes");
+const vitalSignsRoutes = require("./routes/vitalSignsRoutes");
+const uriinaryDetailsRoutes = require("./routes/urinaryDetailsRoutes");
 const patientOutputRoutes = require("./routes/outputRoutes");
 const gastrointestinalInfoRoutes = require("./routes/gastrointestinalInfoRoutes");
 const musculoskeletalInfoRoutes = require("./routes/musculoskeletalInfoRoutes");
-const sequelize = require('./models');
+const patientMedicationRoutes = require("./routes/patientMedicationRoutes");
+const waldoDiagramRoutes = require("./routes/waldoDiagramRoutes");
+const labValuesRoutes = require("./routes/labValuesRoutes");
+const sequelize = require("./models");
 
 // from https://github.com/sequelize/express-example/blob/master/express-main-example/sequelize/index.js
 async function assertDatabaseConnectionOk() {
-	console.log(`Checking database connection...`);
-	try {
-		await sequelize.authenticate();
-		console.log('Database connection OK!');
-	} catch (error) {
-		console.log('Unable to connect to the database:');
-		console.log(error.message);
-		process.exit(1);
-	}
+  console.log(`Checking database connection...`);
+  try {
+    await sequelize.authenticate();
+    console.log("Database connection OK!");
+  } catch (error) {
+    console.log("Unable to connect to the database:");
+    console.log(error.message);
+    process.exit(1);
+  }
 }
 
 assertDatabaseConnectionOk();
@@ -70,6 +73,9 @@ app.use("/consciousness", consciousnessInfoRoutes);
 app.use("/pupils", pupilInfoRoutes);
 app.use("/strength", strengthInfoRoutes);
 app.use("/urinary-details", uriinaryDetailsRoutes);
+app.use("/patients", patientMedicationRoutes);
+app.use("/patients", waldoDiagramRoutes);
+app.use("/patients", labValuesRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
