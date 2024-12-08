@@ -28,7 +28,11 @@ function setupAssociations(sequelize) {
     GastrointestinalInfo,
     ADL,
     PatientHistory, 
-    Note
+    Note,
+    MusculoskeletalInfo,
+    PatientMedications,
+    WALDO_Diagram,
+    LabValues
   } = sequelize.models;
 
   // 1:N relationship between User and Section
@@ -115,6 +119,22 @@ function setupAssociations(sequelize) {
 
   Patient.hasMany(Note, { foreignKey: "patient_id" });
   Note.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:1 relationship between MusculoskeletalInfo and Assessments
+  Assessments.hasOne(MusculoskeletalInfo, { foreignKey: "assessment_id" });
+  MusculoskeletalInfo.belongsTo(Assessments, { foreignKey: "assessment_id" });
+
+  // 1:N relationship between Patient and PatientMedication
+  Patient.hasMany(PatientMedications, { foreignKey: "patient_id" });
+  PatientMedications.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:N relationship between Patient and Waldo diagram
+  Patient.hasMany(WALDO_Diagram, { foreignKey: "patient_id" });
+  WALDO_Diagram.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:N relationship between Patient and lab Values
+  Patient.hasMany(LabValues, { foreignKey: "patient_id" });
+  LabValues.belongsTo(Patient, { foreignKey: "patient_id" });
 }
 
 module.exports = { setupAssociations };

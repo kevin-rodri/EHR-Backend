@@ -1,14 +1,13 @@
-/*
-Name: Gabby Pierce and Dylan Bellinger
-Date: 12/7/2024
-Description: A model representing the ADL (Activities of Daily Living) table in the database.
+/* 
+Name: Dylan Bellinger
+Date: 12/8/2024
+Description: Musculoskeletal Info data model.
 */
-
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
     sequelize.define(
-        "ADL",
+        "MusculoskeletalInfo",
         {
             id: {
                 type: DataTypes.CHAR(36),
@@ -17,43 +16,52 @@ module.exports = (sequelize) => {
                 defaultValue: DataTypes.UUIDV4,
             },
 
-            patient_id: {
+            assessment_id: {
                 type: DataTypes.CHAR(36),
                 allowNull: false,
                 references: {
-                    model: "Patient",
+                    model: "Assessments",
                     key: "id",
                 },
             },
 
-            has_oral_care: {
-                type: DataTypes.BOOLEAN,
+            left_upper_extremity: {
+                type: DataTypes.CHAR(100),
                 allowNull: false,
             },
 
-            has_bathed: {
-                type: DataTypes.BOOLEAN,
+            left_lower_extremity: {
+                type: DataTypes.CHAR(100),
                 allowNull: false,
             },
 
-            reposition: {
-                type: DataTypes.CHAR(255),
+            right_upper_extremity: {
+                type: DataTypes.CHAR(100),
+                allowNull: false,
+            },
+
+            right_lower_extremity: {
+                type: DataTypes.CHAR(100),
+                allowNull: false,
+            },
+
+            gait: {
+                type: DataTypes.CHAR(50),
+                allowNull: false,
+            },
+
+            adl_id: {
+                type: DataTypes.CHAR(36),
+                allowNull: false,
+                references: {
+                    model: "ADL",
+                    key: "id",
+                },
+            },
+
+            abnormalities: {
+                type: DataTypes.CHAR(1000),
                 allowNull: true,
-            },
-
-            elimination_needed: {
-                type: DataTypes.CHAR(255),
-                allowNull: true,
-            },
-
-            is_meal_given: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false,
-            },
-
-            amount_meal_consumed: {
-                type: DataTypes.DECIMAL(5, 2),
-                allowNull: false,
             },
 
             created_by: {
@@ -76,11 +84,11 @@ module.exports = (sequelize) => {
                 type: "TIMESTAMP",
                 defaultValue: DataTypes.NOW,
                 allowNull: false,
-            },
+            }
         },
-    {
-      tableName: "adl", 
-      timestamps: false, 
-    }
-  );
+        {
+            tableName: "musculoskeletal_info",
+            timestamps: false,
+        }
+    );
 };

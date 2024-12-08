@@ -41,7 +41,11 @@ const models = [
   require("./gastrointestinalInfo.model"),
   require("./note.model"),
   require("./patientHistory.model"),
-  require("./adl.model")
+  require("./adl.model"),
+  require("./musculoskeletalInfo.model"),
+  require("./patientMedications.model"),
+  require("./waldoDiagrams.model"), 
+  require("./labValues.model")
   // you get the idea :)
 ];
 

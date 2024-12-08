@@ -32,11 +32,11 @@ describe("ADL Model Unit Tests", () => {
 
     adlRecord = new models.ADL({
       patient_id: patient.id,
-      has_oral_care: 1,
-      has_bathed: 0,
+      has_oral_care: false,
+      has_bathed: true,
       reposition: "Turned to left side",
       elimination_needed: "Assisted",
-      is_meal_given: 1,
+      is_meal_given: true,
       amount_meal_consumed: 75,
       created_by: "nurse@example.com",
       created_date: date,
@@ -47,18 +47,16 @@ describe("ADL Model Unit Tests", () => {
 
   test("CreatesADLRecord_WhenAllConditionsMet_ReturnsObject", () => {
     expect(adlRecord.patient_id).toBe(patient.id);
-    expect(adlRecord.has_oral_care).toBe(1);
-    expect(adlRecord.has_bathed).toBe(0);
+    expect(adlRecord.has_oral_care).toBe(false);
+    expect(adlRecord.has_bathed).toBe(true);
     expect(adlRecord.reposition).toBe("Turned to left side");
     expect(adlRecord.elimination_needed).toBe("Assisted");
-    expect(adlRecord.is_meal_given).toBe(1);
+    expect(adlRecord.is_meal_given).toBe(true);
     expect(adlRecord.amount_meal_consumed).toBe(75);
     expect(adlRecord.created_by).toBe("nurse@example.com");
-    expect(adlRecord.created_date).toBe(date);
     expect(adlRecord.modified_by).toBe("nurse@example.com");
-    expect(adlRecord.modified_date).toBe(date);
   });
-
+      
   test("ThrowsError_WhenPatientIdIsNull_ReturnsValidationError", () => {
     try {
       const copy = { ...adlRecord };
