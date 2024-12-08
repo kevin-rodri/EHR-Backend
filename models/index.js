@@ -24,6 +24,9 @@ const models = [
   require("./section.model"),
   require("./patient.model"),
   require("./patientOrder.model"),
+  require("./note.model"),
+  require("./patientHistory.model"),
+  require("./adl.model")
   // you get the idea :)
 ];
 
