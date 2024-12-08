@@ -11,7 +11,7 @@ describe("Lab Values Unit", () => {
   let labValue = null;
   const date = new Date();
 
-  beforeEach(async () => {
+  beforeEach(() => {
     patient = new models.Patient({
       section_id: null,
       date_of_birth: "1920-10-10",
@@ -42,8 +42,7 @@ describe("Lab Values Unit", () => {
       modified_date: date
     });
   });
-
-
+  
   test("CreatesLabValue_WhenAllConditionsMet_ReturnsLabValueBelongsToPatient", () => {
     expect(labValue.patient_id).toBe(patient.id);
   });

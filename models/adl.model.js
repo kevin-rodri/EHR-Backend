@@ -1,3 +1,9 @@
+/*
+Name: Gabby Pierce and Dylan Bellinger
+Date: 12/7/2024
+Description: A model representing the ADL (Activities of Daily Living) table in the database.
+*/
+
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
@@ -72,9 +78,9 @@ module.exports = (sequelize) => {
                 allowNull: false,
             },
         },
-        {
-            tableName: "adl",
-            timestamps: false,
-        }
-    );
+    {
+      tableName: "adl", 
+      timestamps: false, 
+    }
+  );
 };
