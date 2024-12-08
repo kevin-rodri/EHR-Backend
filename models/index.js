@@ -38,7 +38,10 @@ const models = [
   require("./consciousnessInfo.model"),
   require("./strengthInfo.model"),
   require("./adl.model"),
-  require("./gastrointestinalInfo.model")
+  require("./gastrointestinalInfo.model"),
+  require("./note.model"),
+  require("./patientHistory.model"),
+  require("./adl.model")
   // you get the idea :)
 ];
 

@@ -22,6 +22,10 @@ const vitalSignsRoutes = require('./routes/vitalSignsRoutes');
 const uriinaryDetailsRoutes = require('./routes/urinaryDetailsRoutes');
 const patientOutputRoutes = require("./routes/outputRoutes");
 const gastrointestinalInfoRoutes = require("./routes/gastrointestinalInfoRoutes");
+const patientRoutes  = require("./routes/patientsRoutes");
+const patientHistoryRoutes = require("./routes/patientHistoryRoutes");
+const noteRoutes = require("./routes/noteRoutes");
+const adlRoutes = require("./routes/adlRoutes");
 const sequelize = require('./models');
 
 // from https://github.com/sequelize/express-example/blob/master/express-main-example/sequelize/index.js
@@ -68,6 +72,9 @@ app.use("/consciousness", consciousnessInfoRoutes);
 app.use("/pupils", pupilInfoRoutes);
 app.use("/strength", strengthInfoRoutes);
 app.use("/urinary-details", uriinaryDetailsRoutes);
+app.use("/patients", noteRoutes);
+app.use("/patients", patientHistoryRoutes);
+app.use("/patients", adlRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
