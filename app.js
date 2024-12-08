@@ -22,6 +22,7 @@ const vitalSignsRoutes = require('./routes/vitalSignsRoutes');
 const uriinaryDetailsRoutes = require('./routes/urinaryDetailsRoutes');
 const patientOutputRoutes = require("./routes/outputRoutes");
 const gastrointestinalInfoRoutes = require("./routes/gastrointestinalInfoRoutes");
+const musculoskeletalInfoRoutes = require("./routes/musculoskeletalInfoRoutes");
 const sequelize = require('./models');
 
 // from https://github.com/sequelize/express-example/blob/master/express-main-example/sequelize/index.js
@@ -64,6 +65,7 @@ app.use("/patients", patientIVLinesRoutes);
 app.use("/assessments", genitourinaryInfoRoutes);
 app.use("/assessments", neurologicalInfoRoutes);
 app.use("/assessments", gastrointestinalInfoRoutes);
+app.use("/assessments", musculoskeletalInfoRoutes);
 app.use("/consciousness", consciousnessInfoRoutes);
 app.use("/pupils", pupilInfoRoutes);
 app.use("/strength", strengthInfoRoutes);
