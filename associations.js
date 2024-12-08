@@ -25,6 +25,8 @@ function setupAssociations(sequelize) {
     PupilInfo,
     ConsciousnessInfo,
     StrengthInfo,
+    GastrointestinalInfo,
+    ADL
   } = sequelize.models;
 
   // 1:N relationship between User and Section
@@ -91,9 +93,17 @@ function setupAssociations(sequelize) {
     foreignKey: "neurological_id",
   });
 
+  // 1:N relationship between IV and Lines and Patient
+  Patient.hasMany(ADL, { foreignKey: "patient_id" });
+  ADL.belongsTo(Patient, { foreignKey: "patient_id" });
+
   // 1:1 relationship between NeurologicalInfo and StrengthInfo
   NeurologicalInfo.hasOne(StrengthInfo, { foreignKey: "neurological_id" });
   StrengthInfo.belongsTo(NeurologicalInfo, { foreignKey: "neurological_id" });
+
+  // 1:1 relationship between GastrointestinalInfo and Assessments
+  Assessments.hasOne(GastrointestinalInfo, { foreignKey: "assessment_id" });
+  GastrointestinalInfo.belongsTo(Assessments, { foreignKey: "assessment_id" });
 }
 
 module.exports = { setupAssociations };

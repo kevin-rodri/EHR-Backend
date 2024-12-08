@@ -36,7 +36,9 @@ const models = [
   require("./neurologicalInfo.model"),
   require("./pupilInfo.model"),
   require("./consciousnessInfo.model"),
-  require("./strengthInfo.model")
+  require("./strengthInfo.model"),
+  require("./adl.model"),
+  require("./gastrointestinalInfo.model")
   // you get the idea :)
 ];
 
