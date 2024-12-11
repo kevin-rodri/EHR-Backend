@@ -10,7 +10,7 @@ const {
     addPatientIVLines,
     updatePatientIVLines,
     deletePatientIVLines,
-} = require("../controller/IVandLines.controller");
+} = require("../controller/ivAndLines.controller");
 
 router
     .route("/:patient_id/iv-lines")
