@@ -6,7 +6,7 @@
 const { Sequelize } = require("sequelize");
 const { setupAssociations } = require("../associations");
 require("dotenv").config();
-const mysql2 = require('mysql2'); // needed to run backend through prod
+const mysql2 = require('mysql2');
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
