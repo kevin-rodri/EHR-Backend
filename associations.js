@@ -27,12 +27,16 @@ function setupAssociations(sequelize) {
     StrengthInfo,
     GastrointestinalInfo,
     ADL,
-    PatientHistory, 
+    PatientHistory,
     Note,
     MusculoskeletalInfo,
     PatientMedications,
     WALDO_Diagram,
-    LabValues
+    LabValues,
+    RespiratoryInfo,
+    Lungs,
+    OxygenSupport,
+    SputumChestTubes,
   } = sequelize.models;
 
   // 1:N relationship between User and Section
@@ -135,6 +139,22 @@ function setupAssociations(sequelize) {
   // 1:N relationship between Patient and lab Values
   Patient.hasMany(LabValues, { foreignKey: "patient_id" });
   LabValues.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  // 1:1 relationship between RespiratoryInfo and Assessments
+  Assessments.hasOne(RespiratoryInfo, { foreignKey: "assessment_id" });
+  RespiratoryInfo.belongsTo(Assessments, { foreignKey: "assessment_id" });
+
+  // 1:1 relationship between RespiratoryInfo and Lungs
+  RespiratoryInfo.hasOne(Lungs, { foreignKey: "respiratory_id" });
+  Lungs.belongsTo(RespiratoryInfo, { foreignKey: "respiratory_id" });
+
+  // 1:1 relationship between RespiratoryInfo and OxygenSupport
+  RespiratoryInfo.hasOne(OxygenSupport, { foreignKey: "respiratory_id" });
+  OxygenSupport.belongsTo(RespiratoryInfo, { foreignKey: "respiratory_id" });
+
+  // 1:1 relationship between RespiratoryInfo and SputumChestTubes
+  RespiratoryInfo.hasOne(SputumChestTubes, { foreignKey: "respiratory_id" });
+  SputumChestTubes.belongsTo(RespiratoryInfo, { foreignKey: "respiratory_id" });
 }
 
 module.exports = { setupAssociations };

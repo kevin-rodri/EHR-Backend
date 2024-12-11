@@ -45,7 +45,11 @@ const models = [
   require("./musculoskeletalInfo.model"),
   require("./patientMedications.model"),
   require("./waldoDiagrams.model"), 
-  require("./labValues.model")
+  require("./labValues.model"),
+  require("./respiratoryInfo.model"),
+  require("./lungs.model"),
+  require("./oxygenSupport.model"),
+  require("./sputumChestTubes.model"),
   // you get the idea :)
 ];
 
