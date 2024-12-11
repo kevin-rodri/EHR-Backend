@@ -11,7 +11,7 @@ const {
     addPatientMusculoskeletalInfo,
     updatePatientMusculoskeletalInfo,
     deletePatientMusculoskeletalInfo,
-} = require("../controller/musculoskeletalinfo.controller");
+} = require("../controller/musculoskeletalInfo.controller");
 
 router
     .route("/:assessment_id/musculoskeletal")
