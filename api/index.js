@@ -1,3 +1,6 @@
-import app from '../app';
+const app = require('../app');
 
-module.exports = app;
+// Vercel serverless function export
+module.exports = (req, res) => {
+  app(req, res);
+};
