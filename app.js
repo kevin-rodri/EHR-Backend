@@ -34,6 +34,7 @@ const lungsRoutes = require("./routes/lungsRoutes");
 const oxygenSupportRoutes = require("./routes/oxygenSupportRoutes");
 const sputumChestTubesRoutes = require("./routes/sputumChestTubesRoutes");
 const sequelize = require("./models");
+const cors = require("cors");
 
 // from https://github.com/sequelize/express-example/blob/master/express-main-example/sequelize/index.js
 async function assertDatabaseConnectionOk() {
@@ -60,6 +61,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors({ origin: "http://localhost:3000" }));
 
 app.use("/assessments", assessmentRoutes);
 app.use("/dialysis", dialysisRoutes);
