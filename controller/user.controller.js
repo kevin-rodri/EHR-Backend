@@ -43,10 +43,10 @@ const signInUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { username, password, full_name, role } = req.body;
+  const { username, password, full_name, role , section_id} = req.body;
   try {
     const hashedPassword = await hashPassword(password);
-    const newUser = await models.User.create({ username, password: hashedPassword, full_name, role });
+    const newUser = await models.User.create({ username, password: hashedPassword, full_name, role, section_id});
     
     res.status(201).json(newUser);
   } catch (error) {
