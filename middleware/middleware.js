@@ -26,7 +26,6 @@ const validateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
     if (err) {
-      console.log(err);
       return res.status(403).send("Some invalid token message here.");
     }
     req.user = user;
