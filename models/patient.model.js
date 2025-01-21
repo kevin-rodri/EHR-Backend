@@ -17,13 +17,9 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
       },
-      section_id: {
-        type: DataTypes.CHAR(36),
-        allowNull: true,
-        references: {
-          model: "Section",
-          key: "id",
-        },
+      medical_registration_number: {
+        type: DataTypes.CHAR(20),
+        allowNull: false,
       },
       date_of_birth: {
         type: DataTypes.DATE,

@@ -34,14 +34,11 @@ module.exports = (sequelize) => {
         defaultValue: "STUDENT",
         allowNull: false,
       },
-      section_id: {
-        type: DataTypes.CHAR(36),
-        allowNull: true,
-        references: {
-          model: "Section",
-          key: "id",
-        },
-      },
+     feature_flags: {
+        type: DataTypes.JSON,
+        allowNull: false,
+        defaultValue: {}
+     }
     },
     {
       tableName: "user",

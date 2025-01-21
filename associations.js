@@ -10,6 +10,8 @@ function setupAssociations(sequelize) {
   const {
     User,
     Section,
+    SectionRoster,
+    SectionPatient,
     Patient,
     PatientOrders,
     VitalSigns,
@@ -39,14 +41,27 @@ function setupAssociations(sequelize) {
     SputumChestTubes,
   } = sequelize.models;
 
-  // 1:N relationship between User and Section
-  User.hasMany(Section, { foreignKey: "user_id" });
-  Section.belongsTo(User, { foreignKey: "user_id" });
+  // 1:N relationship between Section and User
+  User.hasMany(Section, { foreignKey: "instructor_id" });
+  Section.belongsTo(User, { foreignKey: "instructor_id" });  
 
-  // 1:N relationship between Patient and Section
-  Patient.hasMany(Section, { foreignKey: "patient_id" });
-  Section.belongsTo(Patient, { foreignKey: "patient_id" });
+  // 1:1 relationship between SectionRoster and Section
+  Section.hasMany(SectionRoster, { foreignKey: "section_id" });
+  SectionRoster.belongsTo(Section, { foreignKey: "section_id" });
 
+  // 1:N relationship between SectionRoster and User
+  SectionRoster.belongsTo(User, { foreignKey: "user_id" });
+  User.hasMany(SectionRoster, { foreignKey: "user_id" });
+  
+  // 1:N relationship between SectionPatient and Section
+  Section.hasMany(SectionPatient, { foreignKey: "section_id" });
+  SectionPatient.belongsTo(Section, { foreignKey: "section_id" });
+
+  // 1:N relationship between SectionPatient and Patient
+  Patient.hasMany(SectionPatient, { foreignKey: "patient_id" });
+  SectionPatient.belongsTo(Patient, { foreignKey: "patient_id" });
+
+  //STAY
   // 1:N relationship between Patient and PatientOrder
   Patient.hasMany(PatientOrders, { foreignKey: "patient_id" });
   PatientOrders.belongsTo(Patient, { foreignKey: "patient_id" });
@@ -118,6 +133,7 @@ function setupAssociations(sequelize) {
   Patient.hasMany(ADL, { foreignKey: "patient_id" });
   ADL.belongsTo(Patient, { foreignKey: "patient_id" });
 
+  // STAY
   Patient.hasMany(PatientHistory, { foreignKey: "patient_id" });
   PatientHistory.belongsTo(Patient, { foreignKey: "patient_id" });
 

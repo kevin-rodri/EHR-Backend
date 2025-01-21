@@ -1,37 +1,42 @@
-/* 
+/*
 Name: Kevin Rodriguez
-Date: 11/4/2024 
-Description: A Section model representing the Section table in the database.
+Date: 1/20/25 
+Remark: A Section Roster model representing the Section Roster table in the database.
 */
-const { DataTypes } = require('sequelize');
+
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Section",
+    "SectionRoster",
     {
       // liquibase changeset has ids as CHAR(36) and uses the UUID() function to generate them
-       // note: DataTypes.UUIDV4 should be the equivalent to the UUID() function in MYSQL
+      // note: DataTypes.UUIDV4 should be the equivalent to the UUID() function in MYSQL
       id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: DataTypes.UUIDV4,
       },
-      section_name: {
-        type: DataTypes.CHAR(25),
+      section_id: {
+        type: DataTypes.CHAR(36),
         allowNull: false,
+        references: {
+          model: "Section",
+          key: "id",
+        },
       },
-      instructor_id: {
+      user_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
           model: "User",
           key: "id",
         },
-      }
+      },
     },
     {
-      tableName: "section",
+      tableName: "section_roster",
       timestamps: false,
     }
   );

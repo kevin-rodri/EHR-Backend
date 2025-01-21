@@ -33,6 +33,8 @@ const respiratoryInfoRoutes = require("./routes/respiratoryInfoRoutes");
 const lungsRoutes = require("./routes/lungsRoutes");
 const oxygenSupportRoutes = require("./routes/oxygenSupportRoutes");
 const sputumChestTubesRoutes = require("./routes/sputumChestTubesRoutes");
+const sectionRosterRoutes = require("./routes/sectionRosterRoutes");
+const sectionPatientsRoutes = require("./routes/sectionPatientRoutes");
 const sequelize = require("./models");
 const cors = require("cors");
 
@@ -61,11 +63,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3000" })); 
 
 app.use("/assessments", assessmentRoutes);
 app.use("/dialysis", dialysisRoutes);
 app.use("/sections", sectionRoutes);
+app.use("/section-patient", sectionPatientsRoutes);
+app.use("/roster", sectionRosterRoutes);
 app.use("/users", userRoutes);
 app.use("/patients", patientOrderRoutes);
 app.use("/patients", patientIntakeRoutes);

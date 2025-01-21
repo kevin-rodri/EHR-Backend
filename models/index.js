@@ -24,6 +24,8 @@ const sequelize = new Sequelize(
 const models = [
   require("./user.model"),
   require("./section.model"),
+  require("./sectionRoster.model"),
+  require("./sectionPatient.model"),
   require("./patient.model"),
   require("./patientOrder.model"),
   require("./intake.model"),

@@ -34,7 +34,7 @@ const signInUser = async (req, res) => {
     }
 
     const token = generateToken(user);
-    res.status(200).json({ token });
+    res.status(200).json({ token: token, feature_flags: user.feature_flags });
   }
   catch (error) {
     console.error(error);
@@ -43,11 +43,26 @@ const signInUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { username, password, full_name, role , section_id} = req.body;
+  const { username, password, full_name, role } = req.body;
   try {
     const hashedPassword = await hashPassword(password);
-    const newUser = await models.User.create({ username, password: hashedPassword, full_name, role, section_id});
+    const newUser = await models.User.create({ username, password: hashedPassword, full_name, role});
     
+    // this where the feature flags are set based on the role
+    if (role === 'ADMIN') {
+      newUser.feature_flags = {
+        is_admin: true,
+      };
+    } else if (role === 'INSTRUCTOR') {
+      newUser.feature_flags = {
+        is_instructor: true,
+      };
+    } else {
+      newUser.feature_flags = {
+        is_student: true,
+      };
+    }
+
     res.status(201).json(newUser);
   } catch (error) {
     console.error(error);

@@ -12,15 +12,16 @@ const {
   updatePatient,
   deletePatient,
 } = require("../controller/patient.controller");
+const { validateToken, isUserAdminFromToken, validateFacultyToken } = require("../middleware/middleware");
 
 router.route("/")
-.get(getAllPatients)
-.post(createPatient);
+.get([validateFacultyToken], getAllPatients)
+.post([isUserAdminFromToken], createPatient);
 
 router
   .route("/:id")
-  .get(getPatientByID)
-  .put(updatePatient)
-  .delete(deletePatient);
+  .get([validateToken], getPatientByID)
+  .put([validateFacultyToken], updatePatient)
+  .delete([isUserAdminFromToken] ,deletePatient);
 
 module.exports = router;

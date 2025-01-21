@@ -12,13 +12,14 @@ const {
   createSection,
   deleteSection,
 } = require("../controller/section.controller");
+const { validateToken, isUserAdminFromToken , validateFacultyToken} = require("../middleware/middleware");
 
-router.route("/").get(getAllSections).post(createSection);
+router.route("/").get(getAllSections).post([isUserAdminFromToken], createSection);
 
 router
   .route("/:id")
-  .get(getSectionById)
-  .put(updateSection)
-  .delete(deleteSection);
+  .get([validateToken], getSectionById)
+  .put([validateFacultyToken], updateSection)
+  .delete([isUserAdminFromToken], deleteSection);
 
 module.exports = router;

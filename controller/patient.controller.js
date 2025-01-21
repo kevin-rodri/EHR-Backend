@@ -12,7 +12,7 @@ const getAllPatients = async (req, res) => {
     const patients = await models.Patient.findAll({
       attributes: [
         "id",
-        "section_id",
+        "medical_registration_number",
         "date_of_birth",
         "religion",
         "full_name",
@@ -40,7 +40,7 @@ const getPatientByID = async (req, res) => {
       where: { id: req.params.id },
       attributes: [
         "id",
-        "section_id",
+        "medical_registration_number",
         "date_of_birth",
         "religion",
         "full_name",
@@ -78,10 +78,10 @@ const createPatient = async (req, res) => {
 const updatePatient = async (req, res) => {
   try {
     const patient = await models.Patient.findOne({
-      where: { id: req.params.id },
+      where: { id: req.params.id }, 
       attributes: [
         "id",
-        "section_id",
+        "medical_registration_number",
         "date_of_birth",
         "religion",
         "full_name",
@@ -111,10 +111,10 @@ const updatePatient = async (req, res) => {
 const deletePatient = async (req, res) => {
   try {
     const patient = await models.Patient.findOne({
-      where: { id: req.params.id },
+      where: { id: req.params.id }, 
       attributes: [
         "id",
-        "section_id",
+        "medical_registration_number",
         "date_of_birth",
         "religion",
         "full_name",
