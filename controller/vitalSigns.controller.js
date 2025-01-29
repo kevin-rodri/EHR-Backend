@@ -5,8 +5,6 @@ Description: Vital Signs controller logic for any requests related to vital sign
 */
 const { models } = require("../models");
 
-const { models } = require("../models");
-
 // gets patient vital signs by section_patient_id
 const getPatientVitalSigns = async (req, res) => {
   try {

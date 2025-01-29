@@ -28,6 +28,7 @@ function setupAssociations(sequelize) {
     ConsciousnessInfo,
     StrengthInfo,
     GastrointestinalInfo,
+    PainScale,
     ADL,
     PatientHistory,
     Note,
