@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 // generates a token when a user signs in
 const generateToken = (user) => {
   return jwt.sign(
-    { username: user.username, role: user.role },
+    { id: user.id, role: user.role },
     process.env.SECRET_KEY,
     { expiresIn: "2h" }
   );

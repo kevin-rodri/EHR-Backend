@@ -47,21 +47,6 @@ const createUser = async (req, res) => {
   try {
     const hashedPassword = await hashPassword(password);
     const newUser = await models.User.create({ username, password: hashedPassword, full_name, role});
-    
-    // this where the feature flags are set based on the role
-    if (role === 'ADMIN') {
-      newUser.feature_flags = {
-        is_admin: true,
-      };
-    } else if (role === 'INSTRUCTOR') {
-      newUser.feature_flags = {
-        is_instructor: true,
-      };
-    } else {
-      newUser.feature_flags = {
-        is_student: true,
-      };
-    }
 
     res.status(201).json(newUser);
   } catch (error) {

@@ -15,11 +15,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      patient_id: {
+      section_patient_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
-          model: "Patient",
+          model: "SectionPatient",
           key: "id",
         },
       },
@@ -44,8 +44,12 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       created_by: {
-        type: DataTypes.CHAR(255),
+        type: DataTypes.CHAR(36),
         allowNull: false,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       created_date: {
         type: "TIMESTAMP",
@@ -53,8 +57,12 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       modified_by: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.CHAR(36),
         allowNull: false,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       modified_date: {
         type: "TIMESTAMP",

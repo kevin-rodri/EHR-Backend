@@ -3,25 +3,25 @@ Name: Gabby Pierce
 Date: 12/1/2024
 Description: The API for table notes
 */
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    'Note',
+    "Note",
     {
-    // liquibase changeset has ids as CHAR(36) and uses the UUID() function to generate them
+      // liquibase changeset has ids as CHAR(36) and uses the UUID() function to generate them
       // note: DataTypes.UUIDV4 should be the equivalent to the UUID() function in MYSQL
       id: {
         type: DataTypes.CHAR(36),
         primaryKey: true,
         allowNull: false,
-        defaultValue: DataTypes.UUIDV4
+        defaultValue: DataTypes.UUIDV4,
       },
-      patient_id: {
+      section_patiet_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
-          model: "patient",
+          model: "SectionPatient",
           key: "id",
         },
       },
@@ -34,22 +34,30 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       created_by: {
-        type: DataTypes.CHAR(225),
+        type: DataTypes.CHAR(36),
         allowNull: false,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       created_date: {
         type: "TIMESTAMP",
-        defaultValue: DataTypes.NOW,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
       modified_by: {
-        type: DataTypes.CHAR(255),
+        type: DataTypes.CHAR(36),
         allowNull: false,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       modified_date: {
         type: "TIMESTAMP",
-        defaultValue: DataTypes.NOW,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
       },
     },
     {

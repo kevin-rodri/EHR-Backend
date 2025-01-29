@@ -1,14 +1,13 @@
-/*
-Name: Charlize Aponte
-Date: 11/28/2024
-Description: A PatientMedications model representing the Patient_Medications table in the database.
+/* 
+Name: Dylan Bellinger
+Date: 11/18/2024 
+Description: Intake data model.
 */
-
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "PatientMedications",
+    "Intake_Output",
     {
       id: {
         type: DataTypes.CHAR(36),
@@ -16,7 +15,7 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      section_patient_id: {
+      section_patiet_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
@@ -24,32 +23,26 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
-      medications_id: {
-        type: DataTypes.CHAR(36),
+      type: {
+        type: DataTypes.ENUM(
+          "PO",
+          "TUBE FEEDING",
+          "IV",
+          "URINE VOIDED",
+          "FOLEY"
+        ),
         allowNull: false,
-        references: {
-          model: "Medications",
-          key: "id",
-        },
       },
-      medication_type: {
-        type: DataTypes.ENUM('SCHEDULED','PRN','AT-HOME'),
-        allowNull: false
+      intake_or_output: {
+        type: DataTypes.ENUM("INTAKE", "OUTPUT"),
+        allowNull: false,
       },
-      scheduled_time: {
+      amount: {
+        type: DataTypes.DECIMAL(5, 2),
+        allowNull: false,
+      },
+      date_and_time_taken: {
         type: "TIMESTAMP",
-        allowNull: false,
-      },
-      dose: {
-        type: DataTypes.CHAR(50),
-        allowNull: false,
-      },
-      route: {
-        type: DataTypes.CHAR(50),
-        allowNull: false,
-      },
-     dose_frequency: {
-        type: DataTypes.CHAR(100),
         allowNull: false,
       },
       created_by: {
@@ -80,7 +73,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      tableName: "patient_medications",
+      tableName: "intake_output",
       timestamps: false,
     }
   );

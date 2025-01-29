@@ -10,32 +10,34 @@ module.exports = (sequelize) => {
   sequelize.define(
     "VitalSigns",
     {
-      // liquibase changeset has ids as CHAR(36) and uses the UUID() function to generate them
-      // note: DataTypes.UUIDV4 should be the equivalent to the UUID() function in MYSQL
       id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      patient_id: {
+      section_patient_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
-          model: "Patient",
+          model: "SectionPatient",
           key: "id",
         },
       },
-      patient_pain_scale_id: {
-        type: DataTypes.CHAR(36),
+      temperature: {
+        type: DataTypes.DECIMAL(5, 2),
         allowNull: false,
-        references: {
-          model: "PatientPainScale",
-          key: "id",
-        },
+      },
+      temperature_source: {
+        type: DataTypes.ENUM("TEMPORAL", "RECTAL", "ORAL", "AXILLA"),
+        allowNull: false,
       },
       heart_rate: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      heart_rate_source: {
+        type: DataTypes.ENUM("MONITOR", "MANUAL"),
         allowNull: false,
       },
       blood_pressure_systolic: {
@@ -46,25 +48,57 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      blood_pressure_source: {
+        type: DataTypes.ENUM("MONITOR", "MANUAL"),
+        allowNull: false,
+      },
+      blood_pressure_cuff_location: {
+        type: DataTypes.ENUM("RIGHT ARM", "LEFT ARM", "RIGHT LEG", "LEFT LEG"),
+        allowNull: false,
+      },
+      patient_position: {
+        type: DataTypes.ENUM("SUPINE", "SITTING", "STANDING"),
+        allowNull: false,
+      },
       respiratory_rate: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       o2_percent_saturation: {
         type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      oxygen_source: {
+        type: DataTypes.ENUM(
+          "ROOM AIR",
+          "NASAL CANULA",
+          "MASK",
+          "NON-REBREATHER",
+          "VENTURI",
+          "SIMPLE MASK",
+          "VENT"
+        ),
         allowNull: false,
       },
-      temperature: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: false,
+      fiO2_percent: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      liters: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
       accu_check_value: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       created_by: {
-        type: DataTypes.STRING,
+        type: DataTypes.CHAR(36),
         allowNull: false,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       created_date: {
         type: "TIMESTAMP",
@@ -72,8 +106,12 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       modified_by: {
-        type: DataTypes.STRING,
+        type: DataTypes.CHAR(36),
         allowNull: false,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       modified_date: {
         type: "TIMESTAMP",

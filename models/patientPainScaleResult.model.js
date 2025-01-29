@@ -1,15 +1,17 @@
-/*
-Name: Charlize Aponte
-Date: 11/28/2024
-Description: A PatientMedications model representing the Patient_Medications table in the database.
+/* 
+Name: Kevin Rodriguez
+Date: 11/27/2024 
+Description: A Patient Pain Scale model representing the Patient Pain Scale table in the database.
 */
 
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "PatientMedications",
+    "PatientPainScale",
     {
+      // liquibase changeset has ids as CHAR(36) and uses the UUID() function to generate them
+      // note: DataTypes.UUIDV4 should be the equivalent to the UUID() function in MYSQL
       id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
@@ -24,33 +26,21 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
-      medications_id: {
+      pain_scale_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
-          model: "Medications",
+          model: "PainScale",
           key: "id",
         },
       },
-      medication_type: {
-        type: DataTypes.ENUM('SCHEDULED','PRN','AT-HOME'),
-        allowNull: false
-      },
-      scheduled_time: {
-        type: "TIMESTAMP",
+      pain_scale_result: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      dose: {
-        type: DataTypes.CHAR(50),
-        allowNull: false,
-      },
-      route: {
-        type: DataTypes.CHAR(50),
-        allowNull: false,
-      },
-     dose_frequency: {
-        type: DataTypes.CHAR(100),
-        allowNull: false,
+      pain_site_text: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       created_by: {
         type: DataTypes.CHAR(36),
@@ -80,7 +70,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      tableName: "patient_medications",
+      tableName: "pain_scale_result",
       timestamps: false,
     }
   );

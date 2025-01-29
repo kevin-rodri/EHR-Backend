@@ -11,7 +11,7 @@ const { models } = require("../models");
 const getPatientLabValues = async (req, res) => {
   try {
     const labValues = await models.LabValues.findAll({
-      where: { patient_id: req.params.patient_id },
+      where: { section_patient_id: req.params.section_patient_id },
     });
     res.status(200).json(labValues);
   } catch (err) {
@@ -24,7 +24,11 @@ const addPatientLabValue = async (req, res) => {
   try {
     const labValue = await models.LabValues.create({
       ...req.body,
-      patient_id: req.params.patient_id,
+      section_patient_id: req.params.section_patient_id,
+      created_by: req.user.id,
+      created_date: new Date(),
+      modified_by: req.user.id,
+      modified_date: new Date(),
     });
     res.status(201).json(labValue);
   } catch (err) {
@@ -37,7 +41,7 @@ const updatePatientLabValue = async (req, res) => {
   try {
     const labValue = await models.LabValues.findOne({
       where: {
-        patient_id: req.params.patient_id,
+        section_patient_id: req.params.section_patient_id,
         id: req.params.id,
       },
     });
@@ -45,7 +49,7 @@ const updatePatientLabValue = async (req, res) => {
     if (labValue != null) {
       await labValue.update({
         ...req.body,
-        modified_by: req.body.modified_by,
+        modified_by: req.user.id,
         modified_date: new Date(),
       });
       res.status(200).json(labValue);
@@ -62,14 +66,14 @@ const deletePatientLabValue = async (req, res) => {
   try {
     const labValue = await models.LabValues.findOne({
       where: {
-        patient_id: req.params.patient_id,
+        section_patient_id: req.params.section_patient_id,
         id: req.params.id,
       },
     });
 
     if (labValue != null) {
       await labValue.destroy();
-      res.status(204).json({ message: "Lab Value deleted successfully" });
+      res.status(204).json(labValue);
     } else {
       res.status(404).json({ error: "Lab Value not found" });
     }

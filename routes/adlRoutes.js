@@ -12,15 +12,15 @@ const {
   updatePatientADL,
   deletePatientADL,
 } = require("../controller/adl.controller");
+const { validateToken } = require("../middleware/middleware");
+router
+  .route("/:section_patient_id/adl")
+  .get([validateToken], getPatientADL) 
+  .post([validateToken], addPatientADL); 
 
 router
-  .route("/:patient_id/adl")
-  .get(getPatientADL) 
-  .post(addPatientADL); 
-
-router
-  .route("/:patient_id/adl/:id")
-  .put(updatePatientADL) 
-  .delete(deletePatientADL);
+  .route("/:section_patient_id/adl/:id")
+  .put([validateToken], updatePatientADL) 
+  .delete([validateToken], deletePatientADL);
 
 module.exports = router;

@@ -9,10 +9,10 @@ const { models } = require("../models");
 
 const getPatientWaldoDiagram = async (req, res) => {
   try {
-    const waldoDiagram = await models.WALDO_Diagram.findAll({
-      where: { patient_id: req.params.patient_id },
+    const waldoDiagrams = await models.WALDO_Diagram.findAll({
+      where: { section_patient_id: req.params.section_patient_id, created_by: req.user.id },
     });
-    res.status(200).json(waldoDiagram);
+    res.status(200).json(waldoDiagrams);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -22,7 +22,11 @@ const addPatientWaldoDiagram = async (req, res) => {
   try {
     const waldoDiagram = await models.WALDO_Diagram.create({
       ...req.body,
-      patient_id: req.params.patient_id,
+      section_patient_id: req.params.section_patient_id,
+      created_by: req.user.id,
+      created_date: new Date(),
+      modified_by: req.user.id,
+      modified_date: new Date(),
     });
     res.status(201).json(waldoDiagram);
   } catch (err) {
@@ -34,14 +38,15 @@ const updatePatientWaldoDiagram = async (req, res) => {
   try {
     const waldoDiagram = await models.WALDO_Diagram.findOne({
       where: {
-        patient_id: req.params.patient_id,
+        section_patient_id: req.params.section_patient_id,
         id: req.params.id,
       },
     });
 
-    if (waldoDiagram) {
+    if (waldoDiagram != null) {
       await waldoDiagram.update({
         ...req.body,
+        modified_by: req.user.id,
         modified_date: new Date(),
       });
       res.status(200).json(waldoDiagram);
@@ -57,14 +62,14 @@ const deletePatientWaldoDiagram = async (req, res) => {
   try {
     const waldoDiagram = await models.WALDO_Diagram.findOne({
       where: {
-        patient_id: req.params.patient_id,
+        section_patient_id: req.params.section_patient_id,
         id: req.params.id,
       },
     });
 
-    if (waldoDiagram) {
+    if (waldoDiagram != null) {
       await waldoDiagram.destroy();
-      res.status(204).json({ message: "WALDO Diagram deleted" });
+      res.status(204).json(waldoDiagram);
     } else {
       res.status(404).json({ error: "WALDO Diagram not found" });
     }

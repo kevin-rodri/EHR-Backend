@@ -12,15 +12,16 @@ const {
   updatePatientVitalSigns,
   deletePatientVitalSigns,
 } = require("../controller/vitalSigns.controller");
+const { validateToken } = require("../middleware/middleware");
 
 router
-  .route("/:patient_id/vital-signs")
-  .get(getPatientVitalSigns)
-  .post(addPatientVitalSigns);
+  .route("/:section_patient_id/vital-signs")
+  .get([validateToken], getPatientVitalSigns)
+  .post([validateToken], addPatientVitalSigns);
 
 router
-  .route("/:patient_id/vital-signs/:id")
-  .put(updatePatientVitalSigns)
-  .delete(deletePatientVitalSigns);
+  .route("/:section_patient_id/vital-signs/:id")
+  .put([validateToken], updatePatientVitalSigns)
+  .delete([validateToken], deletePatientVitalSigns);
 
 module.exports = router;

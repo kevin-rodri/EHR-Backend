@@ -5,12 +5,28 @@ Description: Vital Signs controller logic for any requests related to vital sign
 */
 const { models } = require("../models");
 
-// gets patient vital signs by patient id
+const { models } = require("../models");
+
+// gets patient vital signs by section_patient_id
 const getPatientVitalSigns = async (req, res) => {
   try {
-    const vitalSigns = await models.VitalSigns.findAll({
-      where: { patient_id: req.params.patient_id },
-    });
+    const { section_patient_id } = req.params;
+    const { role, id } = req.user;
+
+    let vitalSigns;
+
+    if (role === "STUDENT") {
+      vitalSigns = await models.VitalSigns.findAll({
+        where: { section_patient_id, created_by: id },
+      });
+    } else if (role === "INSTRUCTOR" || role === "ADMIN") {
+      vitalSigns = await models.VitalSigns.findAll({
+        where: { section_patient_id },
+      });
+    } else {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
     res.status(200).json(vitalSigns);
   } catch (error) {
     console.error(error);
@@ -18,38 +34,41 @@ const getPatientVitalSigns = async (req, res) => {
   }
 };
 
-// creates new vital signs record for a patient
 const addPatientVitalSigns = async (req, res) => {
   try {
-    const { patient_id } = req.params;
+    const { section_patient_id } = req.params;
     const vitalSigns = await models.VitalSigns.create({
-      patient_id,
       ...req.body,
+      section_patient_id,
+      created_by: req.user.id,
+      created_date: new Date(),
+      modified_by: req.user.id,
+      modified_date: new Date(),
     });
-    res.status(200).json(vitalSigns);
+    res.status(201).json(vitalSigns);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error creating vital signs" });
   }
 };
 
-// updates a patient's vital signs based on patient id and vital signs id
 const updatePatientVitalSigns = async (req, res) => {
   try {
+    const { section_patient_id, id } = req.params;
+
     const vitalSigns = await models.VitalSigns.findOne({
-      where: { id: req.params.id, patient_id: req.params.patient_id },
+      where: { id, section_patient_id },
     });
 
     if (vitalSigns != null) {
       await vitalSigns.update({
-        id: req.params.id,
         ...req.body,
-        patient_id: req.params.patient_id,
+        modified_by: req.user.id,
         modified_date: new Date(),
       });
-      return res.status(201).json(vitalSigns);
+      return res.status(200).json(vitalSigns);
     } else {
-      return res.status(404).json({ message: "Unable to find Vital Signs" });
+      return res.status(404).json({ message: "Vital Signs not found" });
     }
   } catch (error) {
     console.error(error);
@@ -57,15 +76,19 @@ const updatePatientVitalSigns = async (req, res) => {
   }
 };
 
-// will delete  a patient's vital signs based on patient id and vital signs id
 const deletePatientVitalSigns = async (req, res) => {
   try {
+    const { section_patient_id, id } = req.params;
+
     const vitalSigns = await models.VitalSigns.findOne({
-      where: { id: req.params.id, patient_id: req.params.patient_id },
+      where: { id, section_patient_id },
     });
+
     if (vitalSigns != null) {
       await vitalSigns.destroy();
       return res.status(204).json(vitalSigns);
+    } else {
+      return res.status(404).json({ message: "Vital Signs not found" });
     }
   } catch (error) {
     console.error(error);

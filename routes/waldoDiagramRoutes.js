@@ -12,16 +12,16 @@ const {
   updatePatientWaldoDiagram,
   deletePatientWaldoDiagram,
 } = require("../controller/waldoDiagram.controller");
-
+const { validateToken } = require("../middleware/middleware");
 
 router
   .route("/:patient_id/waldo-diagram")
-  .get(getPatientWaldoDiagram)
-  .post(addPatientWaldoDiagram);
+  .get([validateToken], getPatientWaldoDiagram)
+  .post([validateToken], addPatientWaldoDiagram);
 
 router
   .route("/:patient_id/waldo-diagram/:id")
-  .put(updatePatientWaldoDiagram)
-  .delete( deletePatientWaldoDiagram);
+  .put([validateToken], updatePatientWaldoDiagram)
+  .delete([validateToken], deletePatientWaldoDiagram);
 
 module.exports = router;

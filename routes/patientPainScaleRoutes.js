@@ -8,15 +8,22 @@ const express = require("express");
 const router = express.Router();
 const {
   getPatientPainScale,
+  getPatientPainScaleById,
   addPatientPainScale,
   updatePatientPainScale,
-} = require("../controller/patientPainScale.controller");
+  deletePatientPainScale,
+} = require("../controller/patientPainScaleResult.controller");
+const { validateToken } = require("../middleware/middleware");
 
-router.route("/:patient_id/pain-scale").post(addPatientPainScale);
+router
+  .route("/:section_patient_id/pain-scale")
+  .post([validateToken], addPatientPainScale)
+  .get([validateToken], getPatientPainScale);
 
 router
   .route("/:patient_id/pain-scale/:id")
-  .get(getPatientPainScale)
-  .put(updatePatientPainScale);
+  .get([validateToken], getPatientPainScaleById)
+  .put([validateToken], updatePatientPainScale)
+  .delete([validateToken], deletePatientPainScale);
 
 module.exports = router;

@@ -17,11 +17,11 @@ module.exports = (sequelize) => {
                 defaultValue: DataTypes.UUIDV4,
             },
 
-            patient_id: {
+            section_patient_id: {
                 type: DataTypes.CHAR(36),
                 allowNull: false,
                 references: {
-                    model: "Patient",
+                    model: "SectionPatient",
                     key: "id",
                 },
             },
@@ -55,27 +55,31 @@ module.exports = (sequelize) => {
                 type: DataTypes.DECIMAL(5, 2),
                 allowNull: false,
             },
-
             created_by: {
-                type: DataTypes.STRING,
+                type: DataTypes.CHAR(36),
                 allowNull: false,
+                references: {
+                    model: "User",
+                    key: "id",
+                },
             },
-
             created_date: {
                 type: "TIMESTAMP",
-                defaultValue: DataTypes.NOW,
                 allowNull: false,
+                defaultValue: DataTypes.NOW, 
             },
-
             modified_by: {
-                type: DataTypes.STRING,
+                type: DataTypes.CHAR(36),
                 allowNull: false,
+                references: {
+                    model: "User",
+                    key: "id",
+                },
             },
-
             modified_date: {
                 type: "TIMESTAMP",
-                defaultValue: DataTypes.NOW,
                 allowNull: false,
+                defaultValue: DataTypes.NOW, 
             },
         },
     {

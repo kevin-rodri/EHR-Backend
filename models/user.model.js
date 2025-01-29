@@ -33,12 +33,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("STUDENT", "ADMIN", "INSTRUCTOR"),
         defaultValue: "STUDENT",
         allowNull: false,
-      },
-     feature_flags: {
-        type: DataTypes.JSON,
-        allowNull: false,
-        defaultValue: {}
-     }
+      }
     },
     {
       tableName: "user",
