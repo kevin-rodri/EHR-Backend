@@ -62,7 +62,7 @@ const validateFacultyToken = (req, res, next) => {
   }
 
   jwt.verify(token, process.env.SECRET_KEY, (user) => {
-    if (user.role != "ADMIN" || user.role != "INSTRUCTOR") {
+    if (user.role == "STUDENT") {
       return res.status(401).send("Unauthorized to access this resource");
     }
     req.user = user;
