@@ -22,7 +22,7 @@ router
   .route("/:id")
   .get([validateToken], getPatientByID)
   .put([validateFacultyToken], updatePatient)
-  .patch([validateFacultyToken], updatePatient)
+  .patch([validateToken], updatePatient)
   .delete([isUserAdminFromToken] ,deletePatient);
 
 module.exports = router;
