@@ -17,6 +17,16 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  try {
+    const user = await models.User.findByPk(req.params.id);
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error retrieving user' });
+  }
+}
+
 const signInUser = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -90,6 +100,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
+  getUserById,
   signInUser,
   createUser,
   updateUser,
