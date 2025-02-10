@@ -12,17 +12,17 @@ const {
   updatePatientHistory,
   deletePatientHistory,
 } = require("../controller/patientHistory.controller");
-const { validateToken, isUserAdminFromToken } = require("../middleware/middleware");
+const { validateToken } = require("../middleware/middleware");
 
 
 router
   .route("/:patient_id/history")
   .get([validateToken], getPatientHistory) 
-  .post([isUserAdminFromToken], addPatientHistory); 
+  .post([validateToken], addPatientHistory); 
 
 router
   .route("/:patient_id/history/:id")
-  .put([isUserAdminFromToken], updatePatientHistory) 
-  .delete([isUserAdminFromToken], deletePatientHistory); 
+  .put([validateToken], updatePatientHistory) 
+  .delete([validateToken], deletePatientHistory); 
 
 module.exports = router;
