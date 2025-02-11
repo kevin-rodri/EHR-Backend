@@ -13,7 +13,7 @@ const {
 } = require("../controller/sectionPatient.controller");
 const { validateToken, isUserAdminFromToken, validateFacultyToken  } = require("../middleware/middleware");
 
-router.route("/:section_id/patient").get([validateToken], getSectionPatient).post([isUserAdminFromToken], addPatientToSection);
+router.route("/:section_id/patient").get([validateToken], getSectionPatient).post([validateToken], addPatientToSection);
 
 router.route("/section-patient/:id").put([validateFacultyToken], updateSectionPatient).delete([isUserAdminFromToken], deleteSectionPatient);
 
