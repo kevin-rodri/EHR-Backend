@@ -15,7 +15,7 @@ const {
 const { validateToken, isUserAdminFromToken, validateFacultyToken } = require("../middleware/middleware");
 
 router.route("/")
-.get([validateFacultyToken], getAllPatients)
+.get([validateToken], getAllPatients)
 .post([isUserAdminFromToken], createPatient);
 
 router
