@@ -12,11 +12,11 @@ const {
   updateSectionRoster,
   deleteSectionRoster,
 } = require("../controller/sectionRoster.controller");
-const { validateToken, isUserAdminFromToken, validateFacultyToken } = require("../middleware/middleware");
+const { validateToken } = require("../middleware/middleware");
 
 router.route("/:section_id/section-roster").get([validateToken], getSectionRoster).post(createSectionRoster);
 
-router.route("/section-roster/:id").put([validateFacultyToken], updateSectionRoster).delete([validateFacultyToken], deleteSectionRoster);
+router.route("/section-roster/:id").put([validateToken], updateSectionRoster).delete([validateToken], deleteSectionRoster);
 
 
 module.exports = router;
