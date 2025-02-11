@@ -16,13 +16,13 @@ const { validateToken, isUserAdminFromToken, validateFacultyToken } = require(".
 
 router.route("/")
 .get([validateToken], getAllPatients)
-.post([isUserAdminFromToken], createPatient);
+.post([validateToken], createPatient);
 
 router
   .route("/:id")
   .get([validateToken], getPatientByID)
-  .put([validateFacultyToken], updatePatient)
+  .put([validateToken], updatePatient)
   .patch([validateToken], updatePatient)
-  .delete([isUserAdminFromToken] ,deletePatient);
+  .delete([validateToken] ,deletePatient);
 
 module.exports = router;
