@@ -18,9 +18,23 @@ const getSectionRoster = async (req, res) => {
   }
 };
 
+const getSectionRosterByUserId = async (req, res) => {
+  try {
+    const sectionRoster = await models.SectionRoster.findOne({
+      where: { user_id: req.params.user_id },
+    });
+    res.status(200).json(sectionRoster);
+  } catch (err) {
+    res.status(550).json({ error: err.message });
+  }
+};
+
 const createSectionRoster = async (req, res) => {
   try {
-    const sectionRoster = await models.SectionRoster.create({...req.body, section_id: req.params.section_id});
+    const sectionRoster = await models.SectionRoster.create({
+      ...req.body,
+      section_id: req.params.section_id,
+    });
     res.status(201).json(sectionRoster);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -44,7 +58,6 @@ const updateSectionRoster = async (req, res) => {
   }
 };
 
-
 const deleteSectionRoster = async (req, res) => {
   try {
     const sectionRoster = await models.SectionRoster.findByPk(req.params.id);
@@ -63,5 +76,6 @@ module.exports = {
   getSectionRoster,
   createSectionRoster,
   updateSectionRoster,
+  getSectionRosterByUserId,
   deleteSectionRoster,
 };

@@ -44,7 +44,7 @@ const signInUser = async (req, res) => {
     }
 
     const token = generateToken(user);
-    res.status(200).json({ token: token, role: user.role });
+    res.status(200).json({ id: id, token: token, role: user.role });
   }
   catch (error) {
     console.error(error);
