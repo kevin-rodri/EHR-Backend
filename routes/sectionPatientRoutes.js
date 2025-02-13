@@ -15,6 +15,6 @@ const { validateToken, isUserAdminFromToken, validateFacultyToken  } = require("
 
 router.route("/:section_id/patient").get([validateToken], getSectionPatient).post([validateToken], addPatientToSection);
 
-router.route("/section-patient/:id").put([validateFacultyToken], updateSectionPatient).delete([isUserAdminFromToken], deleteSectionPatient);
+router.route("/section-patient/:id").put([validateToken], updateSectionPatient).delete([validateToken], deleteSectionPatient);
 
 module.exports = router;
