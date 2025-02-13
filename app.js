@@ -65,7 +65,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cors({ origin: "http://localhost:3000" })); 
+const allowedOrigins = [
+  "http://localhost:3000", // Local development
+  "https://ehr-web-application.vercel.app", // Deployed frontend
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // ✅ Allow if origin is in the list or if it's a same-origin request (like from a backend server)
+      } else {
+        callback(new Error("Not allowed by CORS")); // ❌ Block if not in the list
+      }
+    },
+    methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH",
+    allowedHeaders: "Content-Type,Authorization",
+    credentials: true, // ✅ Allow cookies/auth headers if needed
+  })
+);
 
 app.use("/medications", medicationRoutes);
 app.use("/scales", painScaleRoutes);
