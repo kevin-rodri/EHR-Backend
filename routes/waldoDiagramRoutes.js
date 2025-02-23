@@ -15,12 +15,12 @@ const {
 const { validateToken } = require("../middleware/middleware");
 
 router
-  .route("/:patient_id/waldo-diagram")
+  .route("/:section_patient_id/waldo-diagram")
   .get([validateToken], getPatientWaldoDiagram)
   .post([validateToken], addPatientWaldoDiagram);
 
 router
-  .route("/:patient_id/waldo-diagram/:id")
+  .route("/:section_patient_id/waldo-diagram/:id")
   .put([validateToken], updatePatientWaldoDiagram)
   .delete([validateToken], deletePatientWaldoDiagram);
 
