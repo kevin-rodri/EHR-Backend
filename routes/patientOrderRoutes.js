@@ -15,12 +15,12 @@ const { validateToken, validateFacultyToken } = require("../middleware/middlewar
 
 router
   .route("/:patient_id/orders")
-  .post([validateFacultyToken], createPatientOrder)
+  .post([validateToken], createPatientOrder)
   .get([validateToken], getPatientOrders);
 
 router
   .route("/:patient_id/orders/:id")
-  .put([validateFacultyToken], updatePatientOrder)
-  .delete([validateFacultyToken], deletePatientOrder);
+  .put([validateToken], updatePatientOrder)
+  .delete([validateToken], deletePatientOrder);
 
 module.exports = router;

@@ -20,6 +20,6 @@ router
   .route("/:id")
   .get([validateToken], getSectionById)
   .put([validateFacultyToken], updateSection)
-  .delete([isUserAdminFromToken], deleteSection);
+  .delete([validateToken], deleteSection);
 
 module.exports = router;
