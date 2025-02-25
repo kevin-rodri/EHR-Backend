@@ -170,6 +170,15 @@ function setupAssociations(sequelize) {
   User.hasMany(VitalSigns, { foreignKey: "modified_by" });
   VitalSigns.belongsTo(User, { foreignKey: "modified_by" });
 
+  SectionPatient.hasMany(IV_and_Lines, { foreignKey: "section_patient_id" });
+  IV_and_Lines.belongsTo(SectionPatient, { foreignKey: "section_patient_id" });
+
+  User.hasMany(IV_and_Lines, { foreignKey: "created_by" });
+  IV_and_Lines.belongsTo(User, { foreignKey: "created_by" });
+
+  User.hasMany(IV_and_Lines, { foreignKey: "modified_by" });
+  IV_and_Lines.belongsTo(User, { foreignKey: "modified_by" });
+
 }
 
 module.exports = { setupAssociations };
