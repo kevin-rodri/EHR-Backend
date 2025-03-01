@@ -79,8 +79,8 @@ function setupAssociations(sequelize) {
   });
 
   // 1:N relationship between Medications and PatientMedications
-  Medications.hasMany(PatientMedications, { foreignKey: "medications_id" });
-  PatientMedications.belongsTo(Medications, { foreignKey: "medications_id" });
+  Medications.hasMany(PatientMedications, { foreignKey: "medication_id" });
+  PatientMedications.belongsTo(Medications, { foreignKey: "medication_id" });
 
   // 1:N relationship between User and PatientMedications for created_by
   User.hasMany(PatientMedications, { foreignKey: "created_by" });

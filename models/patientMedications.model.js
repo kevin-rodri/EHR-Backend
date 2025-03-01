@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
-      medications_id: {
+      medication_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
