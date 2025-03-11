@@ -64,7 +64,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       code_status: {
-        type: DataTypes.ENUM("FULL-CODE", "DOES-NOT-RESUSCITATE"),
+        type: DataTypes.ENUM("FULL_CODE", "DOES-NOT-RESUSCITATE"),
         allowNull: false,
       },
       precautions: {
