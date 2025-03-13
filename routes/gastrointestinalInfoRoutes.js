@@ -22,7 +22,7 @@ router
 
 router
   .route("/:section_patient_id/gastrointestinal/students")
-  .get([validateToken], getStudentMusculoskeletalInfo);
+  .get([validateToken], getStudentGastrointestinalInfo);
 router
   .route("/:section_patient_id/gastrointestinal/:id")
   .put([validateToken], updatePatientGastrointestinalInfo)
