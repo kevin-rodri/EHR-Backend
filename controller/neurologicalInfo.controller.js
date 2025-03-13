@@ -6,11 +6,22 @@ Description: Neurological Info controller logic for any requests related to Neur
 
 const { models } = require("../models");
 
+const getStudentNuerologicalInfo = async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // gets the patient neurological info by and assessment id
 const getPatientNeurologicalInfo = async (req, res) => {
   try {
+    const { id } = req.user;
     const neurologicalInfo = await models.NeurologicalInfo.findOne({
-      where: { assessment_id: req.params.assessment_id },
+      where: {
+        section_patient_id: req.params.section_patient_id,
+        created_by: id,
+      },
     });
 
     if (neurologicalInfo == null) {
@@ -30,7 +41,11 @@ const addPatientNeurologicalInfo = async (req, res) => {
   try {
     const neurologicalInfo = await models.NeurologicalInfo.create({
       ...req.body,
-      assessment_id: req.params.assessment_id,
+      section_patient_id: req.params.section_patient_id,
+      created_by: req.user.id,
+      created_date: new Date(),
+      modified_by: req.user.id,
+      modified_date: new Date(),
     });
     res.status(201).json(neurologicalInfo);
   } catch (error) {
@@ -42,9 +57,12 @@ const addPatientNeurologicalInfo = async (req, res) => {
 // updates a patient's neurological info based on the assessment id
 const updatePatientNeurologicalInfo = async (req, res) => {
   try {
-    const neurologicalInfo = await models.NeurologicalInfo.findByPk(
-      req.params.id
-    );
+    const neurologicalInfo = await models.NeurologicalInfo.findOne({
+      where: {
+        section_patient_id: req.params.section_patient_id,
+        id: req.params.id,
+      },
+    });
 
     if (neurologicalInfo == null) {
       return res.status(404).json({
@@ -54,7 +72,7 @@ const updatePatientNeurologicalInfo = async (req, res) => {
       await neurologicalInfo.update({
         id: req.params.id,
         ...req.body,
-        assessment_id: req.params.assessment_id,
+        section_patient_id: req.params.section_patient_id,
         modified_date: new Date(),
       });
       return res.status(200).json(neurologicalInfo);
@@ -68,9 +86,12 @@ const updatePatientNeurologicalInfo = async (req, res) => {
 // deletes the patient's neurological info based on the id
 const deletePatientNeurologicalInfo = async (req, res) => {
   try {
-    const neurologicalInfo = await models.NeurologicalInfo.findByPk(
-      req.params.id
-    );
+    const neurologicalInfo = await models.NeurologicalInfo.findOne({
+      where: {
+        section_patient_id: req.params.section_patient_id,
+        id: req.params.id,
+      },
+    });
 
     if (neurologicalInfo == null) {
       return res.status(404).json({
@@ -87,8 +108,9 @@ const deletePatientNeurologicalInfo = async (req, res) => {
 };
 
 module.exports = {
-    getPatientNeurologicalInfo,
-    addPatientNeurologicalInfo,
-    updatePatientNeurologicalInfo,
-    deletePatientNeurologicalInfo,
-}
+  getStudentNuerologicalInfo,
+  getPatientNeurologicalInfo,
+  addPatientNeurologicalInfo,
+  updatePatientNeurologicalInfo,
+  deletePatientNeurologicalInfo,
+};

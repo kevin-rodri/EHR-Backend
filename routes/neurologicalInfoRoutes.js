@@ -8,21 +8,26 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  getStudentNuerologicalInfo,
   getPatientNeurologicalInfo,
   addPatientNeurologicalInfo,
   updatePatientNeurologicalInfo,
   deletePatientNeurologicalInfo,
 } = require("../controller/neurologicalInfo.controller");
+const { validateToken } = require("../middleware/middleware");
 
 router
-  .route("/:assessment_id/neurological")
-  .get(getPatientNeurologicalInfo)
-  .post(addPatientNeurologicalInfo);
+  .route("/:section_patient_id/neurological")
+  .get([validateToken], getPatientNeurologicalInfo)
+  .post([validateToken], addPatientNeurologicalInfo);
 
 router
-  .route("/:assessment_id/neurological/:id")
-  .put(updatePatientNeurologicalInfo);
+  .route("/:section_patient_id/neurological/students")
+  .get([validateToken],  getStudentNuerologicalInfo);
 
-router.route("/neurological/:id").delete(deletePatientNeurologicalInfo);
+router
+  .route("/:section_patient_id/neurological/:id")
+  .put([validateToken], updatePatientNeurologicalInfo)
+  .delete([validateToken], deletePatientNeurologicalInfo);
 
 module.exports = router;

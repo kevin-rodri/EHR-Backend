@@ -7,22 +7,25 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    getPatientGastrointestinalInfo,
-    addPatientGastrointestinalInfo,
-    updatePatientGastrointestinalInfo,
-    deletePatientGastrointestinalInfo,
+  getStudentGastrointestinalInfo,
+  getPatientGastrointestinalInfo,
+  addPatientGastrointestinalInfo,
+  updatePatientGastrointestinalInfo,
+  deletePatientGastrointestinalInfo,
 } = require("../controller/gastrointestinalInfo.controller");
+const { validateToken } = require("../middleware/middleware");
 
 router
-    .route("/:assessment_id/gastrointestinal")
-    .get(getPatientGastrointestinalInfo)
-    .post(addPatientGastrointestinalInfo);
+  .route("/:section_patient_id/gastrointestinal")
+  .get([validateToken], getPatientGastrointestinalInfo)
+  .post([validateToken], addPatientGastrointestinalInfo);
 
 router
-    .route("/:assessment_id/gastrointestinal/:id")
-    .put(updatePatientGastrointestinalInfo);
-
-router.route("/gastrointestinal/:id")
-    .delete(deletePatientGastrointestinalInfo);
+  .route("/:section_patient_id/gastrointestinal/students")
+  .get([validateToken], getStudentMusculoskeletalInfo);
+router
+  .route("/:section_patient_id/gastrointestinal/:id")
+  .put([validateToken], updatePatientGastrointestinalInfo)
+  .delete([validateToken], deletePatientGastrointestinalInfo);
 
 module.exports = router;

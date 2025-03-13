@@ -179,6 +179,43 @@ function setupAssociations(sequelize) {
   User.hasMany(IV_and_Lines, { foreignKey: "modified_by" });
   IV_and_Lines.belongsTo(User, { foreignKey: "modified_by" });
 
+  SectionPatient.hasMany(MusculoskeletalInfo, { foreignKey: "section_patient_id" });
+  MusculoskeletalInfo.belongsTo(SectionPatient, { foreignKey: "section_patient_id" });
+
+  User.hasMany(MusculoskeletalInfo, { foreignKey: "created_by" });
+  MusculoskeletalInfo.belongsTo(User, { foreignKey: "created_by" });
+
+  User.hasMany(MusculoskeletalInfo, { foreignKey: "modified_by" });
+  MusculoskeletalInfo.belongsTo(User, { foreignKey: "modified_by" });
+
+  SectionPatient.hasMany(GastrointestinalInfo, { foreignKey: "section_patient_id" });
+  GastrointestinalInfo.belongsTo(SectionPatient, { foreignKey: "section_patient_id" });
+
+  User.hasMany(GastrointestinalInfo, { foreignKey: "created_by" });
+  GastrointestinalInfo.belongsTo(User, { foreignKey: "created_by" });
+
+  User.hasMany(GastrointestinalInfo, { foreignKey: "modified_by" });
+  GastrointestinalInfo.belongsTo(User, { foreignKey: "modified_by" });
+
+
+  SectionPatient.hasMany(RespiratoryInfo, { foreignKey: "section_patient_id" });
+  RespiratoryInfo.belongsTo(SectionPatient, { foreignKey: "section_patient_id" });
+
+  User.hasMany(RespiratoryInfo, { foreignKey: "created_by" });
+  RespiratoryInfo.belongsTo(User, { foreignKey: "created_by" });
+
+  User.hasMany(RespiratoryInfo, { foreignKey: "modified_by" });
+  RespiratoryInfo.belongsTo(User, { foreignKey: "modified_by" });
+
+
+  SectionPatient.hasMany(NeurologicalInfo, { foreignKey: "section_patient_id" });
+  NeurologicalInfo.belongsTo(SectionPatient, { foreignKey: "section_patient_id" });
+
+  User.hasMany(NeurologicalInfo, { foreignKey: "created_by" });
+  NeurologicalInfo.belongsTo(User, { foreignKey: "created_by" });
+
+  User.hasMany(NeurologicalInfo, { foreignKey: "modified_by" });
+  NeurologicalInfo.belongsTo(User, { foreignKey: "modified_by" });
 }
 
 module.exports = { setupAssociations };

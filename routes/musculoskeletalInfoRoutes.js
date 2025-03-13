@@ -7,22 +7,26 @@ const express = require("express");
 const router = express.Router();
 
 const {
+    getStudentMusculoskeletalInfo,
     getPatientMusculoskeletalInfo,
     addPatientMusculoskeletalInfo,
     updatePatientMusculoskeletalInfo,
     deletePatientMusculoskeletalInfo,
 } = require("../controller/musculoskeletalInfo.controller");
+const { validateToken } = require("../middleware/middleware");
 
 router
-    .route("/:assessment_id/musculoskeletal")
-    .get(getPatientMusculoskeletalInfo)
-    .post(addPatientMusculoskeletalInfo);
+    .route("/:section_patient_id/musculoskeletal")
+    .get([validateToken], getPatientMusculoskeletalInfo)
+    .post([validateToken], addPatientMusculoskeletalInfo);
+
+router.route("/:section_patient_id/musculoskeletal/students")
+    .get([validateToken], getStudentMusculoskeletalInfo);
 
 router
-    .route("/:assessment_id/musculoskeletal/:id")
-    .put(updatePatientMusculoskeletalInfo);
+    .route("/:section_patient_id//musculoskeletal/:id")
+    .put([validateToken], updatePatientMusculoskeletalInfo)
+    .delete([validateToken], deletePatientMusculoskeletalInfo);
 
-router.route("/musculoskeletal/:id")
-    .delete(deletePatientMusculoskeletalInfo);
 
 module.exports = router;

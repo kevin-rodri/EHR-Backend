@@ -8,21 +8,26 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  getStudentRespiratoryInfo,
   getPatientRespiratoryInfo,
   addPatientRespiratoryInfo,
   updatePatientRespiratoryInfo,
   deletePatientRespiratoryInfo,
 } = require("../controller/respiratoryInfo.controller");
+const { validateToken } = require("../middleware/middleware");
 
 router
-  .route("/:assessment_id/respiratory")
-  .get(getPatientRespiratoryInfo)
-  .post(addPatientRespiratoryInfo);
+  .route("/:section_patient_id/respiratory")
+  .get([validateToken], getPatientRespiratoryInfo)
+  .get([validateToken], addPatientRespiratoryInfo);
 
 router
-  .route("/:assessment_id/respiratory/:id")
-  .put(updatePatientRespiratoryInfo);
+  .route("/:section_patient_id/respiratory/students")
+  .get([validateToken], getStudentRespiratoryInfo);
 
-router.route("/respiratory/:id").delete(deletePatientRespiratoryInfo);
+router
+  .route("/:section_patient_id/respiratory/:id")
+  .put([validateToken], updatePatientRespiratoryInfo)
+  .delete([validateToken], deletePatientRespiratoryInfo);
 
 module.exports = router;

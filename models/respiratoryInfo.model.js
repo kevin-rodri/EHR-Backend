@@ -17,17 +17,105 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      assessment_id: {
+      section_patient_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
-          model: "Assessments",
+          model: "SectionPatient",
           key: "id",
         },
       },
-      created_by: {
+      breathing_pattern: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      breathing_effort: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      anterior_right_upper_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      posterior_right_upper_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      anterior_lower_upper_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      posterior_lower_upper_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      anterior_right_middle_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      posterior_right_middle_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      anterior_right_lower_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      posterior_right_lower_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      anterior_left_lower_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      posterior_left_lower_lobe: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      has_continuous_oxygen_pulse: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
+      has_oxygen_support: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
+      oxygen_support_device: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      oxygen_flow_rate: {
+        type: DataTypes.CHAR(100),
+        allowNull: false,
+      },
+      sputum_amount: {
+        type: DataTypes.DECIMAL(5, 2),
+        allowNull: false,
+      },
+      sputum_color: {
+        type: DataTypes.CHAR(50),
+        allowNull: false,
+      },
+      has_incentive_spirometer_use: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      chest_tube_location: {
+        type: DataTypes.CHAR(50),
+        allowNull: true,
+      },
+      chest_tube_suction: {
+        type: DataTypes.CHAR(50),
+        allowNull: true,
+      },
+      created_by: {
+        type: DataTypes.CHAR(36),
+        allowNull: false,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       created_date: {
         type: "TIMESTAMP",
@@ -35,8 +123,12 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       modified_by: {
-        type: DataTypes.STRING,
+        type: DataTypes.CHAR(36),
         allowNull: false,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       modified_date: {
         type: "TIMESTAMP",
