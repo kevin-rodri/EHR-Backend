@@ -41,7 +41,7 @@ const updatePatientOrder = async (req, res) => {
       },
     });
     if (patientOrder != null) {
-      await patientOrder.update({ ...req.body, modifed_date: new Date() });
+      await patientOrder.update({ ...req.body, modified_date: new Date() });
       res.status(200).json(patientOrder);
     } else {
       res.status(404).json({ error: "Patient Order not found" });
