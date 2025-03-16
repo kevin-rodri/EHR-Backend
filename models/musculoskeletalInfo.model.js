@@ -25,12 +25,8 @@ module.exports = (sequelize) => {
         },
       },
       adl_id: {
-        type: DataTypes.CHAR(36),
+        type: DataTypes.CHAR(100),
         allowNull: false,
-        references: {
-          model: "ADL",
-          key: "id",
-        },
       },
       left_upper_extremity: {
         type: DataTypes.CHAR(100),
