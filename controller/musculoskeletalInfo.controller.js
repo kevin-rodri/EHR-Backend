@@ -54,11 +54,6 @@ const getPatientMusculoskeletalInfo = async (req, res) => {
         created_by: id,
       },
     });
-    if (musculoskeletalInfo == null) {
-      res.status(404).json({
-        message: "Unable to find patient's musculoskeletal info.",
-      });
-    }
     res.status(200).json(musculoskeletalInfo);
   } catch (error) {
     console.error(error);
