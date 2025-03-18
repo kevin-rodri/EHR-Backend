@@ -35,6 +35,11 @@ module.exports = (sequelize) => {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
             },
+            has_foley_care: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false,
+            },
 
             reposition: {
                 type: DataTypes.CHAR(255),
