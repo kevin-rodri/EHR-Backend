@@ -38,7 +38,6 @@ module.exports = (sequelize) => {
             has_foley_care: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
-                defaultValue: false,
             },
 
             reposition: {
