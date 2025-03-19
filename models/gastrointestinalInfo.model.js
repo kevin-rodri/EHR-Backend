@@ -57,7 +57,21 @@ module.exports = (sequelize) => {
         type: DataTypes.CHAR(255),
         allowNull: false,
       },
-      
+
+      abdomen_description: {
+        type: DataTypes.CHAR(255),
+        allowNull: false,
+      },
+
+      nausea: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      diarrhea: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+
       created_by: {
         type: DataTypes.CHAR(36),
         allowNull: false,
