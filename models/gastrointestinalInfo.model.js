@@ -66,12 +66,12 @@ module.exports = (sequelize) => {
       nausea: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-    },
-    diarrhea: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-  },
-      
+      },
+      diarrhea: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+
       created_by: {
         type: DataTypes.CHAR(36),
         allowNull: false,
