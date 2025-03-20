@@ -24,7 +24,7 @@ router.route("/:section_patient_id/musculoskeletal/students")
     .get([validateToken], getStudentMusculoskeletalInfo);
 
 router
-    .route("/:section_patient_id//musculoskeletal/:id")
+    .route("/:section_patient_id/musculoskeletal/:id")
     .put([validateToken], updatePatientMusculoskeletalInfo)
     .delete([validateToken], deletePatientMusculoskeletalInfo);
 
