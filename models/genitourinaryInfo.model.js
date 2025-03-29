@@ -49,7 +49,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       date_of_last_treatment: {
-        type: DataTypes.DATE,
+        type: "TIMESTAMP",
         allowNull: false,
       },
       dialysis_access_type: {
@@ -65,7 +65,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       foley_removed: {
-        type: DataTypes.DATE,
+        type: "TIMESTAMP",
         allowNull: false,
       },
       created_by: {
