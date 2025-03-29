@@ -216,6 +216,17 @@ function setupAssociations(sequelize) {
 
   User.hasMany(NeurologicalInfo, { foreignKey: "modified_by" });
   NeurologicalInfo.belongsTo(User, { foreignKey: "modified_by" });
+
+  SectionPatient.hasMany(GenitourinaryInfo, { foreignKey: "section_patient_id" });
+  GenitourinaryInfo.belongsTo(SectionPatient, { foreignKey: "section_patient_id" });
+
+  User.hasMany(GenitourinaryInfo, { foreignKey: "created_by" });
+  GenitourinaryInfo.belongsTo(User, { foreignKey: "created_by" });
+
+  User.hasMany(GenitourinaryInfo, { foreignKey: "modified_by" });
+  GenitourinaryInfo.belongsTo(User, { foreignKey: "modified_by" });
+
+
 }
 
 module.exports = { setupAssociations };

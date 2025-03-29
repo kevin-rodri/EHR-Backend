@@ -12,17 +12,24 @@ const {
   addPatientGenitourinaryInfo,
   updatePatientGenitourinaryInfo,
   deletePatientGenitourinaryInfo,
+  getStudentGenitournaryInfo
 } = require("../controller/genitourinaryInfo.controller");
+const { validateToken } = require("../middleware/middleware");
+
 
 router
-  .route("/:assessment_id/genitourinary")
-  .get(getPatientGenitourinaryInfo)
-  .post(addPatientGenitourinaryInfo);
+  .route("/:section_patient_id/genitourinary")
+  .get([validateToken], getPatientGenitourinaryInfo)
+  .post([validateToken], addPatientGenitourinaryInfo);
+
+  router
+  .route("/:section_patient_id/genitourinary/students")
+  .get([validateToken], getStudentGenitournaryInfo);
 
 router
-  .route("/:assessment_id/genitourinary/:id")
-  .put(updatePatientGenitourinaryInfo);
+  .route("/:section_patient_id/genitourinary/:id")
+  .put([validateToken], updatePatientGenitourinaryInfo)
+  .delete([validateToken], deletePatientGenitourinaryInfo);
 
-router.route("/genitourinary/:id").delete(deletePatientGenitourinaryInfo);
 
 module.exports = router;
