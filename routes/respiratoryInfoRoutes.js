@@ -19,7 +19,7 @@ const { validateToken } = require("../middleware/middleware");
 router
   .route("/:section_patient_id/respiratory")
   .get([validateToken], getPatientRespiratoryInfo)
-  .get([validateToken], addPatientRespiratoryInfo);
+  .post([validateToken], addPatientRespiratoryInfo);
 
 router
   .route("/:section_patient_id/respiratory/students")
