@@ -96,6 +96,7 @@ const updatePatientGenitourinaryInfo = async (req, res) => {
       });
     } else {
       await genitourinaryInfo.update({
+        id: req.params.id,
         ...req.body,
         section_patient_id: req.params.section_patient_id,
         modified_by: req.user.id,
