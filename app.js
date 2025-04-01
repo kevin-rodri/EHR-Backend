@@ -36,7 +36,7 @@ const sputumChestTubesRoutes = require("./routes/sputumChestTubesRoutes");
 const sectionRosterRoutes = require("./routes/sectionRosterRoutes");
 const sectionPatientsRoutes = require("./routes/sectionPatientRoutes");
 const medicationRoutes = require("./routes/medicationRoutes");
-const painScaleRoutes = require("./routes/patientPainScaleRoutes");
+const painScaleRoutes = require("./routes/painScaleRoutes");
 const sequelize = require("./models");
 const cors = require("cors");
 
