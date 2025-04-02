@@ -94,7 +94,7 @@ const updatePatientGenitourinaryInfo = async (req, res) => {
       return res.status(404).json({
         message: "Unable to find the patient's genitourinary assessment",
       });
-    } else {
+    } else
       await genitourinaryInfo.update({
         id: req.params.id,
         ...req.body,
