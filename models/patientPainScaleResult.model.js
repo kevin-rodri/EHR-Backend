@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      pain_site_text: {
+      pain_scale_text: {
         type: DataTypes.STRING,
         allowNull: true,
       },
