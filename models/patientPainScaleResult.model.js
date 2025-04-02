@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
-      pain_scale_result: {
+      pain_scale_value: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
