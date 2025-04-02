@@ -21,7 +21,7 @@ router
   .get([validateToken], getPatientPainScale);
 
 router
-  .route("/:patient_id/pain-scale/:id")
+  .route("/:section_patient_id/pain-scale/:id")
   .get([validateToken], getPatientPainScaleById)
   .put([validateToken], updatePatientPainScale)
   .delete([validateToken], deletePatientPainScale);
