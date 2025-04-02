@@ -56,23 +56,12 @@ const updatePatientLabValue = async (req, res) => {
     if (labValue == null) {
       return res.status(404).json({ error: "Lab Value not found" });
     }
-
-    const allowedUpdates = ["element_name", "element_value"];
-    const updateData = {};
-
-    for (const key of allowedUpdates) {
-      if (req.body[key] !== undefined) {
-        updateData[key] = req.body[key];
-      }
-    }
-
-    updateData.modified_by = req.user.id;
-    updateData.modified_date = new Date();
-
-    // Apply updates
-    await labValue.update(updateData);
-
-    const updatedLabValue = await models.LabValues.findOne({ where: { id } });
+    const updatedLabValue = await labValue.update({
+      ...req.body,
+      section_patient_id: req.params.section_patient_id,
+      modified_by: req.user.id,
+      modified_date: new Date(),
+    });
 
     res.status(200).json(updatedLabValue);
   } catch (err) {
@@ -80,7 +69,6 @@ const updatePatientLabValue = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 // DELETE /patients/{patientId}/lab-values/{id} - Delete a lab value
 const deletePatientLabValue = async (req, res) => {

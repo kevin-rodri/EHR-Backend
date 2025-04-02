@@ -90,11 +90,12 @@ const updatePatientGenitourinaryInfo = async (req, res) => {
         id: req.params.id,
       },
     });
+
     if (genitourinaryInfo == null) {
       return res.status(404).json({
         message: "Unable to find the patient's genitourinary assessment",
       });
-    } else
+    } else {
       await genitourinaryInfo.update({
         id: req.params.id,
         ...req.body,
@@ -102,6 +103,7 @@ const updatePatientGenitourinaryInfo = async (req, res) => {
         modified_by: req.user.id,
         modified_date: new Date(),
       });
+
       return res.status(200).json(genitourinaryInfo);
     }
   } catch (error) {
@@ -109,6 +111,7 @@ const updatePatientGenitourinaryInfo = async (req, res) => {
     res.status(500).json({ message: "Error updating genitourinary info" });
   }
 };
+
 
 // now let's delete the patient's genitourinary info based on the assessment id
 const deletePatientGenitourinaryInfo = async (req, res) => {

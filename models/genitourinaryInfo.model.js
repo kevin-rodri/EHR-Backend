@@ -56,10 +56,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(255),
         allowNull: false,
       },
-      has_dialysis_access_dressing_change: {
+      has_dialysis_access_dressing_cdi: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        field: "has_dialysis_access_dressing_cdi"
       },
       foley_catheter: {
         type: DataTypes.STRING(100),
