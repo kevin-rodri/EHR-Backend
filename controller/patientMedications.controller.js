@@ -76,7 +76,7 @@ const getAtHomeMedications = async (req, res) => {
       medications = await models.PatientMedications.findAll({
         where: {
           section_patient_id: req.params.section_patient_id,
-          medication_type: "PRN",
+          medication_type: "AT-HOME",
           created_by: id,
         },
       });
@@ -84,7 +84,7 @@ const getAtHomeMedications = async (req, res) => {
       medications = await models.PatientMedications.findAll({
         where: {
           section_patient_id: req.params.section_patient_id,
-          medication_type: "PRN",
+          medication_type: "AT-HOME",
         },
       });
     } else {
