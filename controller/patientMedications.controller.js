@@ -87,6 +87,7 @@ const getAtHomeMedications = async (req, res) => {
           medication_type: "AT-HOME",
         },
       });
+      res.status(200).json(medications);
     } else {
       return res.status(403).json({ error: "Unable to access resource" });
     }
