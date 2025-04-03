@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      section_patiet_id: {
+      section_patient_id: {
         type: DataTypes.CHAR(36),
         allowNull: false,
         references: {
