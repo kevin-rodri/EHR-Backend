@@ -71,6 +71,7 @@ const getPRNMedications = async (req, res) => {
 // gets all the at-home medications for all patients
 const getAtHomeMedications = async (req, res) => {
   try {
+    const { role, id } = req.user;
     if (role === "STUDENT") {
       medications = await models.PatientMedications.findAll({
         where: {
