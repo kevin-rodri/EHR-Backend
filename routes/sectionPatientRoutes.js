@@ -10,11 +10,14 @@ const {
   addPatientToSection,
   updateSectionPatient,
   deleteSectionPatient,
+  scanPatient
 } = require("../controller/sectionPatient.controller");
 const { validateToken, isUserAdminFromToken, validateFacultyToken  } = require("../middleware/middleware");
 
 router.route("/:section_id/patient").get([validateToken], getSectionPatient).post([validateToken], addPatientToSection);
 
 router.route("/section-patient/:id").put([validateToken], updateSectionPatient).delete([validateToken], deleteSectionPatient);
+
+router.route("/:id/scan").post([validateToken], scanPatient);
 
 module.exports = router;

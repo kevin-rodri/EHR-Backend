@@ -68,6 +68,53 @@ const getPRNMedications = async (req, res) => {
   }
 };
 
+const scanMedication = async (req, res) => {
+  try {
+    // Step 2: Get scanned medication by barcode
+    const medication = await models.Medications.findOne({
+      where: { barcode_value: req.body.barcode_value },
+    });
+
+    // Step 1: Get patient-medication record
+    const patientMedication = await models.PatientMedications.findOne({
+      where: {
+        section_patient_id: req.params.section_patient_id,
+        medication_id: medication.id,
+      },
+    });
+
+    if (!patientMedication) {
+      return res.status(404).json({ error: "Patient medication not found." });
+    }
+
+    if (!medication) {
+      return res
+        .status(404)
+        .json({ error: "Medication not found for provided barcode." });
+    }
+
+    const isCorrectMedication =
+      medication.id === patientMedication.medication_id;
+
+    // Step 5: Final response logic
+    if (!isCorrectMedication) {
+      return res.status(400).json({
+        message: "Scanned medication does not match prescribed medication.",
+        expected_medication_id: patientMedication.medication_id,
+        scanned_medication_id: medication.id,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Medication is correct and safe to administer.",
+      medication,
+    });
+  } catch (err) {
+    console.error("Scan medication error:", err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
 // gets all the at-home medications for all patients
 const getAtHomeMedications = async (req, res) => {
   try {
@@ -165,4 +212,5 @@ module.exports = {
   addPatientMedication,
   updatePatientMedication,
   deletePatientMedication,
+  scanMedication,
 };

@@ -25,6 +25,7 @@ const getAllPatients = async (req, res) => {
         "emergency_contact_phone_number",
         "code_status",
         "precautions",
+        "barcode_value",
       ],
     });
     res.status(200).json(patients);
@@ -53,6 +54,7 @@ const getPatientByID = async (req, res) => {
         "emergency_contact_phone_number",
         "code_status",
         "precautions",
+        "barcode_value",
       ],
     });
     if (patient == null) {
@@ -70,7 +72,13 @@ const createPatient = async (req, res) => {
     const patient = await models.Patient.create(req.body);
     res.status(201).json(patient);
   } catch (error) {
-    console.error(error);
+    console.error("Create Patient Error:", error);
+    if (error.name === "SequelizeValidationError") {
+      return res.status(400).json({
+        message: "Validation failed",
+        errors: error.errors.map((e) => e.message),
+      });
+    }
     res.status(500).json({ message: "Error creating patient" });
   }
 };
@@ -78,7 +86,7 @@ const createPatient = async (req, res) => {
 const updatePatient = async (req, res) => {
   try {
     const patient = await models.Patient.findOne({
-      where: { id: req.params.id }, 
+      where: { id: req.params.id },
       attributes: [
         "id",
         "medical_registration_number",
@@ -94,6 +102,7 @@ const updatePatient = async (req, res) => {
         "emergency_contact_phone_number",
         "code_status",
         "precautions",
+        "barcode_value",
       ],
     });
     if (patient != null) {
@@ -111,7 +120,7 @@ const updatePatient = async (req, res) => {
 const deletePatient = async (req, res) => {
   try {
     const patient = await models.Patient.findOne({
-      where: { id: req.params.id }, 
+      where: { id: req.params.id },
       attributes: [
         "id",
         "medical_registration_number",
@@ -127,6 +136,7 @@ const deletePatient = async (req, res) => {
         "emergency_contact_phone_number",
         "code_status",
         "precautions",
+        "barcode_value",
       ],
     });
     if (patient != null) {

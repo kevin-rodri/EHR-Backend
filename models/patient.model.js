@@ -77,6 +77,10 @@ module.exports = (sequelize) => {
         ),
         allowNull: false,
       },
+      barcode_value: {
+        type: DataTypes.CHAR(500), 
+        allowNull: false
+      }
     },
     {
       tableName: "patient",

@@ -13,6 +13,7 @@ const {
   addPatientMedication,
   updatePatientMedication,
   deletePatientMedication,
+  scanMedication,
 } = require("../controller/patientMedications.controller");
 const { validateToken } = require("../middleware/middleware");
 
@@ -27,6 +28,8 @@ router
 router
   .route("/:section_patient_id/home")
   .get([validateToken], getAtHomeMedications);
+
+router.route("/:section_patient_id/scan").post([validateToken], scanMedication);
 
 router
   .route("/:section_patient_id")
