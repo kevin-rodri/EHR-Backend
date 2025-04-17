@@ -47,47 +47,47 @@ const updateSectionPatient = async (req, res) => {
 };
 
 const scanPatient = async (req, res) => {
-    try {
-      const { barcode_value } = req.body;
-      const { id } = req.params;
-  
-      if (!barcode_value) {
-        return res.status(400).json({ error: "Missing barcode_value in request body." });
-      }
-  
-      const sectionPatient = await models.SectionPatient.findByPk(id);
-  
-      if (!sectionPatient) {
-        return res.status(404).json({ error: "Section Patient not found." });
-      }
-  
-      const patient = await models.Patient.findOne({
-        where: { barcode_value },
-      });
-  
-      if (!patient) {
-        return res.status(404).json({ error: "No patient found with the given barcode." });
-      }
-  
-      const isCorrectPatient = patient.id === sectionPatient.patient_id;
-  
-      if (isCorrectPatient) {
-        return res.status(200).json({
-          message: "Correct patient scanned.",
-          patient,
-        });
-      } else {
-        return res.status(400).json({
-          message: "Scanned patient does not match the expected patient.",
-          expected_patient_id: sectionPatient.patient_id,
-          scanned_patient_id: patient.id,
-        });
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  try {
+    const { barcode_value } = req.body;
+    const { id } = req.params;
+
+    if (!barcode_value) {
+      return res
+        .status(400)
+        .json({ error: "Missing barcode_value in request body." });
     }
-  };
-  
+
+    const sectionPatient = await models.SectionPatient.findByPk(id);
+
+    if (!sectionPatient) {
+      return res.status(404).json({ error: "Section Patient not found." });
+    }
+
+    const patient = await models.Patient.findOne({
+      where: { barcode_value },
+    });
+
+    if (!patient) {
+      return res
+        .status(404)
+        .json({ error: "No patient found with the given barcode." });
+    }
+
+    const isCorrectPatient = patient.id === sectionPatient.patient_id;
+
+    if (isCorrectPatient) {
+      return res.status(200).json({
+        message: "Correct patient scanned.",
+      });
+    } else {
+      return res.status(400).json({
+        message: "Scanned patient does not match the expected patient.",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 const deleteSectionPatient = async (req, res) => {
   try {

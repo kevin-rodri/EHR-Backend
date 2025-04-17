@@ -100,14 +100,11 @@ const scanMedication = async (req, res) => {
     if (!isCorrectMedication) {
       return res.status(400).json({
         message: "Scanned medication does not match prescribed medication.",
-        expected_medication_id: patientMedication.medication_id,
-        scanned_medication_id: medication.id,
       });
     }
 
     return res.status(200).json({
-      message: "Medication is correct and safe to administer.",
-      medication,
+      message: "Medication is correct and safe to administer."
     });
   } catch (err) {
     console.error("Scan medication error:", err);
