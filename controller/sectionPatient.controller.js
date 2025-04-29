@@ -66,7 +66,7 @@ const scanPatient = async (req, res) => {
     const patient = await models.Patient.findOne({
       where: {
         barcode_value: req.body.barcode_value,
-        patient_id: sectionPatient.patient_id,
+        id: sectionPatient.patient_id,
       },
     });
 
