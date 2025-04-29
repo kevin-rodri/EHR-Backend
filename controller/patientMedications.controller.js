@@ -101,9 +101,7 @@ const scanMedication = async (req, res) => {
       });
     }
 
-    return res.status(200).json({
-      message: "Medication is correct and safe to administer."
-    });
+    return res.status(200).json(patientMedication);
   } catch (err) {
     console.error("Scan medication error:", err);
     res.status(500).json({ error: err.message });
