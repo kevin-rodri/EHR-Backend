@@ -70,12 +70,10 @@ const getPRNMedications = async (req, res) => {
 
 const scanMedication = async (req, res) => {
   try {
-    // Step 2: Get scanned medication by barcode
     const medication = await models.Medications.findOne({
       where: { barcode_value: req.body.barcode_value },
     });
 
-    // Step 1: Get patient-medication record
     const patientMedication = await models.PatientMedications.findOne({
       where: {
         section_patient_id: req.params.section_patient_id,
